@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-// TODO: Use coroutines instead of update : sign StartCoroutine()
 public class TerrainGeneration : MonoBehaviour
 {
     public int width = 500; //x-axis of the terrain
@@ -12,17 +13,19 @@ public class TerrainGeneration : MonoBehaviour
 
     public float offsetX = 50f;
     public float offsetY = 100f;
-
+    
     private void Start()
     {
+        
         offsetX = Random.Range(0f, 9999f);
         offsetY = Random.Range(0f, 9999f);
+        var terrain = GetComponent<Terrain>();
+        terrain.terrainData = GenerateTerrain(terrain.terrainData);
     }
 
-    private void Update()
+    private void OnApplicationQuit()
     {
-        Terrain terrain = GetComponent<Terrain>();
-        terrain.terrainData = GenerateTerrain(terrain.terrainData);
+        var terrain = GetComponent<Terrain>();
     }
 
     TerrainData GenerateTerrain (TerrainData terrainData)
@@ -31,10 +34,11 @@ public class TerrainGeneration : MonoBehaviour
         terrainData.size = new Vector3(width, depth, height);
 
         terrainData.SetHeights(0, 0, GenerateHeights());
+        print(terrainData);
         return terrainData;
     }
 
-    float[,] GenerateHeights()
+    private float[,] GenerateHeights()
     {
         float[,] heights = new float[width, height];
         for(int x = 0; x < width; x++)
@@ -44,14 +48,13 @@ public class TerrainGeneration : MonoBehaviour
                 heights[x, y] = CalculateHeight(x, y);
             }
         }
-
         return heights;
     }
 
-    float CalculateHeight (int x, int y)
+    private float CalculateHeight (int x, int y)
     {
-        float xCoord = (float)x / width * scale + offsetX;
-        float yCoord = (float)y / height * scale + offsetY;
+        var xCoord = (float)x / width * scale + offsetX;
+        var yCoord = (float)y / height * scale + offsetY;
 
         return Mathf.PerlinNoise(xCoord, yCoord);
     }
