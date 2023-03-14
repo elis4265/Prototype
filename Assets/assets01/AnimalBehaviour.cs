@@ -60,7 +60,7 @@ public class AnimalBehaviour : MonoBehaviour
 				}
 				hungry = !hungry;
 				SeekGrass();
-				HungerTimer = Random.Range(7f, 15f);
+				HungerTimer = Random.Range(7f, 25f);
 			}
 		}
 		else	
@@ -84,7 +84,7 @@ public class AnimalBehaviour : MonoBehaviour
 			return false;
 		else
 		{
-			if (Vector3.Distance(targetedObject.transform.position, this.transform.position) <= 0.5)
+			if (Vector3.Distance(targetedObject.transform.position, this.transform.position) <= 1f)
 				return EatObject();
 		}
 		return true;
