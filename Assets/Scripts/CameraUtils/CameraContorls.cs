@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraContorls : MonoBehaviour
 {
+    public float speed = 10;
+
     Vector3 initialPosition;
+    private Vector3 eularAngles;
     Quaternion initialRotation;
     // WSAD birdview controls
     // QE rotations on Z
@@ -15,50 +19,39 @@ public class CameraContorls : MonoBehaviour
     {
         initialPosition = transform.position;
         initialRotation = transform.rotation;
+        eularAngles = transform.eulerAngles;
     }
     void Update()
     {
-        if (Input.GetKey(KeyCode.W)) transform.position += Vector3.forward;
-        if (Input.GetKey(KeyCode.S)) transform.position += Vector3.back;
-        if (Input.GetKey(KeyCode.A)) transform.position += Vector3.left;
-        if (Input.GetKey(KeyCode.D)) transform.position += Vector3.right;
+        if (Input.GetKey(KeyCode.W)) transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.World);
+        if (Input.GetKey(KeyCode.S)) transform.Translate(Vector3.back * Time.deltaTime * speed, Space.World);
+        if (Input.GetKey(KeyCode.A)) transform.Translate(Vector3.left * Time.deltaTime * speed, Space.World);
+        if (Input.GetKey(KeyCode.D)) transform.Translate(Vector3.right * Time.deltaTime * speed, Space.World);
 
         if (Input.GetKey(KeyCode.Q))
         {
-            transform.eulerAngles = new Vector3(
-            transform.eulerAngles.x,
-            transform.eulerAngles.y,
-            transform.eulerAngles.z - 1
-            );
+            eularAngles.y--;
+            transform.eulerAngles = eularAngles;
         }
         if (Input.GetKey(KeyCode.E))
         {
-            transform.eulerAngles = new Vector3(
-            transform.eulerAngles.x,
-            transform.eulerAngles.y,
-            transform.eulerAngles.z + 1
-            );  
+            eularAngles.y++;
+            transform.eulerAngles = eularAngles;
         }
 
         if (Input.GetKey(KeyCode.R))
         {
-            transform.eulerAngles = new Vector3(
-            transform.eulerAngles.x - 1,
-            transform.eulerAngles.y,
-            transform.eulerAngles.z
-            );
+            eularAngles.x--;
+            transform.eulerAngles = eularAngles;
         }
         if (Input.GetKey(KeyCode.F))
         {
-            transform.eulerAngles = new Vector3(
-            transform.eulerAngles.x + 1,
-            transform.eulerAngles.y,
-            transform.eulerAngles.z
-            );
+            eularAngles.x++;
+            transform.eulerAngles = eularAngles;
         }
 
-        if (Input.GetKey(KeyCode.Z)) transform.position += Vector3.down;
-        if (Input.GetKey(KeyCode.X)) transform.position += Vector3.up;
+        if (Input.GetKey(KeyCode.Z)) transform.Translate(Vector3.down * Time.deltaTime * speed, Space.World);
+        if (Input.GetKey(KeyCode.X)) transform.Translate(Vector3.up * Time.deltaTime * speed, Space.World);
 
         if (Input.GetKeyDown(KeyCode.P))
         {
