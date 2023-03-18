@@ -27,12 +27,21 @@ public class DayNightCycler : MonoBehaviour
         //SetLightAngleBasedOnTime(time);
 
     }
+    /// <summary>
+    /// Function to update time and setup new light position every minute.
+    /// It's called from ClockHandler.
+    /// </summary>
+    /// <param name="time">Currennt time.</param>
     public void UpdateDayNightTime(int2 time)
     {
         this.time = time;
         UpdateLightDirection(timeDay ? LIGHT_ANGLE_STEP_DAY : LIGHT_ANGLE_STEP_NIGHT);
         Debug.Log(timeDay ? "day" : "Night");
     }
+    /// <summary>
+    /// Updates angle of light sources based on time or by incrementing.
+    /// </summary>
+    /// <param name="increment">How much angle of light changes per minute.</param>
     private void UpdateLightDirection(float increment)
     {
         lightAngle.x += increment;
@@ -40,6 +49,9 @@ public class DayNightCycler : MonoBehaviour
         SetLightAngleBasedOnTime(time);
         //ligthSourceDay.transform.parent.eulerAngles = lightAngle;
     }
+    /// <summary>
+    /// Swaps between shadows from day light and shadows from night light based on time.
+    /// </summary>
     private void UpdateShadowSource()
     {
         if (time.x == MORNING_START && !timeDay)
@@ -57,6 +69,10 @@ public class DayNightCycler : MonoBehaviour
             ligthSourceNight.GetComponent<Light>().shadows = LightShadows.Soft;
         }
     }
+    /// <summary>
+    /// Calculate light angle based on time.
+    /// </summary>
+    /// <param name="time">Time for wanted light angle.</param>
     public void SetLightAngleBasedOnTime(int2 time)
     {
         int timeHours = time.x;
@@ -88,10 +104,18 @@ public class DayNightCycler : MonoBehaviour
         lightAngle.x = angle;
         ligthSourceDay.transform.parent.eulerAngles = lightAngle;
     }
+    /// <summary>
+    /// Check if its day based on time.
+    /// </summary>
+    /// <returns>Returns false if its night otherwise returns true.</returns>
     private bool CheckDay()
     {
         if (time.x < MORNING_START || time.x > EVENING_START) return false;
         return true;
     }
+    /// <summary>
+    /// Returns lenght of day and length of an hour.
+    /// </summary>
+    /// <returns>Return int2 (hours,minutes) time.</returns>
     public int2 GetDayLenght() { return new int2(HOURS_IN_DAY, MINUTES_IN_HOUR); }
 }

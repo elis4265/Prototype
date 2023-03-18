@@ -13,7 +13,7 @@ public class TimeTickSystem : MonoBehaviour
 
     public static event EventHandler<OnTickEventArgs> OnTick;
     // how often should tick occur (0.2 == 200ms)
-    private const float TICK_TIMER_MAX = 1f;
+    private const float TICK_TIMER_MAX = 0.01f;
 
     private float tickTimer;
     private float tickSpeedMultiplier = 1;

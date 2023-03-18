@@ -16,11 +16,6 @@ public class TimeManagmentEditor : Editor
         base.OnInspectorGUI();
 
         ClockHnadler clockHnadler = (ClockHnadler)target;
-        EditorGUILayout.LabelField("faster<x<slower");
-        if (GUILayout.Button("UpdateTimeSpeed"))
-        {
-            clockHnadler.UpdateTimeSpeed();
-        }
 
         if (GUILayout.Button("Pause/Unpause"))
         {

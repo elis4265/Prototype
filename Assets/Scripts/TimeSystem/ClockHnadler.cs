@@ -16,22 +16,34 @@ public class ClockHnadler : MonoBehaviour
     public TextMeshProUGUI timeTextField;
     public DayNightCycler dayNightCycler;
 
-    public float timeSpeed;
+    [Range(1,20)]
+    public int timeSpeed = 10;
+    public int tick;
 
-
+    /// <summary>
+    /// Initiating properties and subcribing to tick event.
+    /// </summary>
     void Start()
     {
         date = int3.zero;
         time = new int2(0, 0);
-        UpdateTimeSpeed();
+        ///Subscribinf to Tick system and updating time and daylight.
         TimeTickSystem.OnTick += delegate (object sender, TimeTickSystem.OnTickEventArgs e)
         {
             if (pause) return;
-            if(logTimeInfo) Debug.Log("Tick " + e.tick);
-            IncreaseTime();
-            dayNightCycler.UpdateDayNightTime(time);
+            tick++;
+            if (tick >= timeSpeed)
+            {
+                tick -= timeSpeed;
+                if(logTimeInfo) Debug.Log("Tick " + e.tick);
+                IncreaseTime();
+                dayNightCycler.UpdateDayNightTime(time);
+            }
         };
     }
+    /// <summary>
+    /// Increasing time value and updating OnScreen clock.
+    /// </summary>
     private void IncreaseTime()
     {
         int hours = time.x;
@@ -53,10 +65,6 @@ public class ClockHnadler : MonoBehaviour
 
         if(logTimeInfo) Debug.Log(timeTextField.text);
     }
-   
-    public void UpdateTimeSpeed()
-    {
-        transform.GetComponent<TimeTickSystem>().SetSpeed(timeSpeed);
-    }
+
     public void SwapPause() { pause = !pause; }
 }
