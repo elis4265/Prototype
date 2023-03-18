@@ -581,9 +581,11 @@ MonoBehaviour:
     x: 0
     y: 0
   logTimeInfo: 0
+  pause: 0
   timeTextField: {fileID: 1815515892}
   dayNightCycler: {fileID: 1739828153}
-  timeSpeed: 0.01
+  timeSpeed: 10
+  tick: 0
 --- !u!1 &945886653
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,8 +961,8 @@ MonoBehaviour:
     x: 0
     y: 0
   timeDay: 0
-  ligthSourceDay: {fileID: 0}
-  ligthSourceNight: {fileID: 0}
+  ligthSourceDay: {fileID: 410087039}
+  ligthSourceNight: {fileID: 1353220832}
 --- !u!1 &1815515890
 GameObject:
   m_ObjectHideFlags: 0
