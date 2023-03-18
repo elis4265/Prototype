@@ -5,13 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 public class MeshGenerator : MonoBehaviour
 {
-
     Mesh mesh;
 
     Vector3[] vertices;
     int[] triangles;
 
+	[SerializeField, Range(20, 50)]
     public int xSize = 20;
+	[SerializeField, Range(2, 5)]
+    public float ySize = 2;
+	[SerializeField, Range(20, 50)]
     public int zSize = 20;
     
     // Start is called before the first frame update
@@ -22,6 +25,11 @@ public class MeshGenerator : MonoBehaviour
         CreateShape();
         UpdateMesh();
     }
+	
+	private void OnApplicationQuit()
+    {
+        var mesh = GetComponent<MeshFilter>().mesh;
+    }
 
     void CreateShape()
     {
@@ -31,7 +39,7 @@ public class MeshGenerator : MonoBehaviour
         {
             for (int x = 0; x<=xSize; x++)
             {
-                float y = Mathf.PerlinNoise(x * .3f, z * .3f) * 2f;
+                float y = Mathf.PerlinNoise(x * .3f, z * .3f) * ySize;
                 vertices[i] = new Vector3(x, y, z);
                 i++;
             }
@@ -75,7 +83,7 @@ public class MeshGenerator : MonoBehaviour
       }
 
        // Optionally, draw spheres at each vertex
-      private void OnDrawGizmos()
+      /*private void OnDrawGizmos()
       {
           if (vertices == null)
               return;
@@ -84,6 +92,6 @@ public class MeshGenerator : MonoBehaviour
           {
               Gizmos.DrawSphere(vertices[i], 0.1f);
           }
-      }
+      }*/
      
 }

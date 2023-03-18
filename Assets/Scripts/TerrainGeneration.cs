@@ -13,7 +13,7 @@ public class TerrainGeneration : MonoBehaviour
 
     public float offsetX = 50f;
     public float offsetY = 100f;
-    
+
     private void Start()
     {
         

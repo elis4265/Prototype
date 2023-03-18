@@ -92,7 +92,7 @@ public class AnimalBehaviour : MonoBehaviour
 	
 	private void RandomRoam()
 	{
-        Vector3 newPosition = new Vector3(Random.Range(-10.0f, 10.0f), 0, Random.Range(-10.0f, 10.0f));
+        Vector3 newPosition = new Vector3(Random.Range(-10.0f, 10.0f), 0f, Random.Range(-10.0f, 10.0f));
 		Vector3 destination = this.transform.position + newPosition;
 		agent.SetDestination(destination);
 		isDestinationTargeted = true;
