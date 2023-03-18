@@ -16,11 +16,21 @@ public class TimeManagmentEditor : Editor
         base.OnInspectorGUI();
 
         ClockHnadler clockHnadler = (ClockHnadler)target;
+        EditorGUILayout.LabelField("faster<x<slower");
         if (GUILayout.Button("UpdateTimeSpeed"))
         {
             clockHnadler.UpdateTimeSpeed();
         }
-        EditorGUILayout.LabelField("faster<x<slower");
+
+        if (GUILayout.Button("Pause/Unpause"))
+        {
+            clockHnadler.SwapPause();
+        }
+
+        if (GUILayout.Button("UpdateLightPosition"))
+        {
+            clockHnadler.dayNightCycler.SetLightAngleBasedOnTime(clockHnadler.time);
+        }
 
     }
 }
