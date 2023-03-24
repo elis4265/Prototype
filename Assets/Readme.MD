@@ -11,8 +11,7 @@ Will consist of following:
 -  Resources: logic
 -  Resources: generation
 -  Animals: models
--  Animals: roaming
--  Animals: feeding
+-  Animals: logic
 -  4 seasons (sprint, summer, autumn, winter)
 
 #### 
