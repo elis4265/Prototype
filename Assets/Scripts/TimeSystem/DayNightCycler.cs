@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -13,6 +14,7 @@ public class DayNightCycler : MonoBehaviour
     private const int DAY_LENGHT = HOURS_IN_DAY - NIGHT_LENGHT;
     private const float LIGHT_ANGLE_STEP_NIGHT = 180f / (NIGHT_LENGHT * MINUTES_IN_HOUR);
     private const float LIGHT_ANGLE_STEP_DAY = 180f / (DAY_LENGHT * MINUTES_IN_HOUR);
+
 
     private Vector3 lightAngle;
     public int2 time;
@@ -35,7 +37,7 @@ public class DayNightCycler : MonoBehaviour
     public void UpdateDayNightTime(int2 time)
     {
         this.time = time;
-        UpdateLightDirection(timeDay ? LIGHT_ANGLE_STEP_DAY : LIGHT_ANGLE_STEP_NIGHT);
+        if(CheckLightObject()) UpdateLightDirection(timeDay ? LIGHT_ANGLE_STEP_DAY : LIGHT_ANGLE_STEP_NIGHT);
         Debug.Log(timeDay ? "day" : "Night");
     }
     /// <summary>
@@ -118,4 +120,17 @@ public class DayNightCycler : MonoBehaviour
     /// </summary>
     /// <returns>Return int2 (hours,minutes) time.</returns>
     public int2 GetDayLenght() { return new int2(HOURS_IN_DAY, MINUTES_IN_HOUR); }
+    /// <summary>
+    /// Check if lightsources are missing.
+    /// </summary>
+    /// <returns>True if no lightsource is missing.</returns>
+    private bool CheckLightObject()
+    {
+        if (!ligthSourceDay|| !ligthSourceNight)
+        {
+            Debug.Log("Lightsource missing!");
+            return false;
+        }
+        return true;
+    }
 }
