@@ -403,8 +403,9 @@ MonoBehaviour:
   timeTextField: {fileID: 1827106341}
   dateTextField: {fileID: 1402318861}
   dayNightCycler: {fileID: 646743772}
-  timeSpeed: 10
+  timeSpeed: 9
   tick: 0
+  ultraSpeed: 1
 --- !u!114 &646743774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,6 +487,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8001f8f139096f247b227bd591fce862, type: 3}
+--- !u!23 &677936465 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3442213780928214437, guid: 9686b0d5365ad4145baf768dbfb8134d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1672443330}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &872709545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1146,6 +1153,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3442213780928214437, guid: 9686b0d5365ad4145baf768dbfb8134d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7bba0ee445d9d07419b955fc5000ad73, type: 2}
     - target: {fileID: 8575875500974221017, guid: 9686b0d5365ad4145baf768dbfb8134d,
         type: 3}
       propertyPath: m_Name
@@ -1343,6 +1355,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1827106339}
   m_CullTransparentMesh: 1
+--- !u!1 &1881065748 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8575875500974221017, guid: 9686b0d5365ad4145baf768dbfb8134d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1672443330}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1881065750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881065748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa1c95ca1cd0d24b93f3745acef2461, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantSettings: {fileID: 11400000, guid: 4a7d62b351f0d6246a9cc5cd0db50dfd, type: 2}
+  leaves: {fileID: 677936465}
+  currentSeason: 0
 --- !u!1 &1966564334
 GameObject:
   m_ObjectHideFlags: 0

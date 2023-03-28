@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static TimeTickSystem;
 
 public class ClockHnadler : MonoBehaviour
 {
@@ -19,8 +20,8 @@ public class ClockHnadler : MonoBehaviour
 
     public static event EventHandler<OnDayStartEventArgs> OnDayStart;
 
-    private int3 date; // create event for new day
-    public int2 time;
+    private int3 date = new int3(0, 1, 0); // create event for new day
+    public int2 time = new int2(0, 0);
 
     public bool logTimeInfo = false;
     public bool pause = false;
@@ -39,8 +40,6 @@ public class ClockHnadler : MonoBehaviour
     /// </summary>
     void Start()
     {
-        date = int3.zero;
-        time = new int2(0, 0);
         ///Subscribinf to Tick system and updating time and daylight.
         TimeTickSystem.OnTick += delegate (object sender, TimeTickSystem.OnTickEventArgs e)
         {
@@ -120,6 +119,7 @@ public class ClockHnadler : MonoBehaviour
                 date.x++;
             }
         }
+        OnDayStart(this, new OnDayStartEventArgs { date = date });
         UpdateDateText();
     }
     private void UpdateDateText()
