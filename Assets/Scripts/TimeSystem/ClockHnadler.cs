@@ -12,6 +12,7 @@ public class ClockHnadler : MonoBehaviour
 {
     public static int DAYS_IN_MONTH = 30;
     public static int MONTHS_IN_YEAR = 8;
+    public static int SEASONS = 4;
 
     public class OnDayStartEventArgs: EventArgs
     {

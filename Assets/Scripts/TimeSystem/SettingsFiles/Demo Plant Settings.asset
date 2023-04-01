@@ -12,14 +12,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5bf6f4826629514c9ebbd35daf206dd, type: 3}
   m_Name: Demo Plant Settings
   m_EditorClassIdentifier: 
+  hasFruits: 1
   seasonSettings:
   - fruitingSpeed: 0
-    harvestable: 0
+    growthSpeed: 0
     resourceAmount: 0
-    colorScheme:
+    leavesColorScheme:
       serializedVersion: 2
-      key0: {r: 0, g: 0, b: 0, a: 1}
-      key1: {r: 0.9529412, g: 0.031372532, b: 0.12731287, a: 1}
+      key0: {r: 0, g: 0.8301887, b: 0.049128804, a: 1}
+      key1: {r: 0.14677718, g: 0.6415094, b: 0.0932004, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65342
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    fruitsColorScheme:
+      serializedVersion: 2
+      key0: {r: 0.112627305, g: 0.8962264, b: 0.028746825, a: 1}
+      key1: {r: 0.9245283, g: 0.30003557, b: 0.30003557, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -47,12 +77,41 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
     haveFoliage: 1
   - fruitingSpeed: 0
-    harvestable: 0
+    growthSpeed: 0
     resourceAmount: 0
-    colorScheme:
+    leavesColorScheme:
       serializedVersion: 2
-      key0: {r: 0.972549, g: 0.027173623, b: 0, a: 1}
-      key1: {r: 0.99317425, g: 1, b: 0.015686274, a: 1}
+      key0: {r: 0.14901961, g: 0.6431373, b: 0.09411765, a: 1}
+      key1: {r: 0.09657797, g: 0.2830189, b: 0.059807748, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    fruitsColorScheme:
+      serializedVersion: 2
+      key0: {r: 0.9254902, g: 0.3019608, b: 0.3019608, a: 1}
+      key1: {r: 1, g: 0.19110468, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -80,12 +139,41 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
     haveFoliage: 1
   - fruitingSpeed: 0
-    harvestable: 0
+    growthSpeed: 0
     resourceAmount: 0
-    colorScheme:
+    leavesColorScheme:
       serializedVersion: 2
-      key0: {r: 0.986397, g: 1, b: 0, a: 1}
-      key1: {r: 0.09746252, g: 0.3490566, b: 0.09714311, a: 1}
+      key0: {r: 0.09803922, g: 0.28235295, b: 0.05882353, a: 1}
+      key1: {r: 0.754717, g: 0.33528566, b: 0, a: 1}
+      key2: {r: 0.43024093, g: 0.30913067, b: 0.029065743, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 37201
+      ctime2: 65535
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 3
+      m_NumAlphaKeys: 2
+    fruitsColorScheme:
+      serializedVersion: 2
+      key0: {r: 1, g: 0.19215687, b: 0, a: 1}
+      key1: {r: 0.46226418, g: 0.1992981, b: 0.06279813, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -113,12 +201,41 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
     haveFoliage: 1
   - fruitingSpeed: 0
-    harvestable: 0
+    growthSpeed: 0
     resourceAmount: 0
-    colorScheme:
+    leavesColorScheme:
       serializedVersion: 2
-      key0: {r: 0.010325324, g: 0.3301887, b: 0, a: 1}
-      key1: {r: 0, g: 0, b: 0, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 1, g: 1, b: 1, a: 0}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    fruitsColorScheme:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

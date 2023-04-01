@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!23 &150517302 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4925357068367855411, guid: 9686b0d5365ad4145baf768dbfb8134d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1672443330}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &163301606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -342,6 +348,7 @@ GameObject:
   - component: {fileID: 646743773}
   - component: {fileID: 646743772}
   - component: {fileID: 646743774}
+  - component: {fileID: 646743775}
   m_Layer: 0
   m_Name: TimeManager
   m_TagString: Untagged
@@ -418,6 +425,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57dce04c94eb5654ebadc8336478eaa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &646743775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646743770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa1c95ca1cd0d24b93f3745acef2461, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantSettings: {fileID: 0}
+  leaves: {fileID: 0}
+  fruits: {fileID: 0}
+  currentSeason: 0
 --- !u!1001 &671471366
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1368,14 +1391,34 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1881065748}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fa1c95ca1cd0d24b93f3745acef2461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   plantSettings: {fileID: 11400000, guid: 4a7d62b351f0d6246a9cc5cd0db50dfd, type: 2}
-  leaves: {fileID: 677936465}
+  leaves: {fileID: 150517302}
+  fruits: {fileID: 677936465}
   currentSeason: 0
+--- !u!114 &1881065752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881065748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a90a68f0bfd414894f42a03af25449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantSettings: {fileID: 11400000, guid: 4a7d62b351f0d6246a9cc5cd0db50dfd, type: 2}
+  fruits:
+  - {fileID: 677936465}
+  leaves:
+  - {fileID: 150517302}
+  tickMultiplier: 0
+  plantSettingsFoldout: 1
 --- !u!1 &1966564334
 GameObject:
   m_ObjectHideFlags: 0
