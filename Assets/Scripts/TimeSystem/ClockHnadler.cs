@@ -17,6 +17,7 @@ public class ClockHnadler : MonoBehaviour
     public class OnDayStartEventArgs: EventArgs
     {
         public int3 date;
+        public int season;
     }
 
     public static event EventHandler<OnDayStartEventArgs> OnDayStart;
@@ -120,7 +121,7 @@ public class ClockHnadler : MonoBehaviour
                 date.x++;
             }
         }
-        OnDayStart(this, new OnDayStartEventArgs { date = date });
+        OnDayStart(this, new OnDayStartEventArgs { date = date, season = GetSeason(date.y) });
         UpdateDateText();
     }
     private void UpdateDateText()
@@ -128,4 +129,6 @@ public class ClockHnadler : MonoBehaviour
         if (!americanDateFormat)dateTextField.text = $"{date.z} / {date.y} / {date.x}";
         else dateTextField.text = $"{date.y} / {date.z} / {date.x}";
     }
+    private int GetSeason(int month) { return (month + 1) / (MONTHS_IN_YEAR / SEASONS) - 1; }  // 2 months per seasons, needs better calculation to be universal
+
 }

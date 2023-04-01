@@ -5,7 +5,12 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class PlantSettings : ScriptableObject
 {
-    public bool hasFruits = false;
+    [HideInInspector]
+    public bool hasFruits;
+    [ConditionalHide("hasFruits")]
+    public Gradient fruitsColorScheme;
+    [ConditionalHide("hasFruits"), Range(0,10)]
+    public int harvestCooldown = 1;
     public SeasonSettings[] seasonSettings = new SeasonSettings[4];
 
 
@@ -20,8 +25,6 @@ public class PlantSettings : ScriptableObject
         public int growthSpeed;
         public int resourceAmount = 0;
         public Gradient leavesColorScheme;
-        [ConditionalHide("hasFruits")]
-        public Gradient fruitsColorScheme;
-        public bool haveFoliage = false;
+        public bool haveFoliage = true;
     }
 }

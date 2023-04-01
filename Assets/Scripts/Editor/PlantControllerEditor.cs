@@ -13,7 +13,14 @@ public class PlantControllerEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        base.OnInspectorGUI();
+        using (var check = new EditorGUI.ChangeCheckScope())
+        {
+            base.OnInspectorGUI();
+            if (check.changed)
+            {
+                plantController.plantSettings.hasFruits = plantController.hasFruits;
+            }
+        }
 
         if (plantController.plantSettings.hasFruits)
         {
@@ -23,6 +30,10 @@ public class PlantControllerEditor : Editor
             }
         }
 
+        if (GUILayout.Button("Reset growth"))
+        {
+            plantController.ResetPlantGrowth();
+        }
         DrawSettingsEditor(plantController.plantSettings, ref plantController.plantSettingsFoldout, ref plantSettingsEditor);
     }
 

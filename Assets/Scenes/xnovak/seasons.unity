@@ -123,12 +123,33 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!23 &150517302 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 4925357068367855411, guid: 9686b0d5365ad4145baf768dbfb8134d,
+--- !u!1 &42454511 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5720884447262519821, guid: 8001f8f139096f247b227bd591fce862,
     type: 3}
-  m_PrefabInstance: {fileID: 1672443330}
+  m_PrefabInstance: {fileID: 671471366}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &42454513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42454511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a90a68f0bfd414894f42a03af25449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultScale: {x: 0, y: 0, z: 0}
+  hasFruits: 0
+  plantSettings: {fileID: 11400000, guid: 81e459043a7982e4b9f53ca1c52f600d, type: 2}
+  fruits: {fileID: 0}
+  leaves: {fileID: 1108345651}
+  tickMultiplier: 1
+  growthProgressFruit: 0
+  growthProgressPlant: 100
+  plantSettingsFoldout: 0
 --- !u!1001 &163301606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -139,7 +160,7 @@ PrefabInstance:
     - target: {fileID: 1481289185575961337, guid: f385288f9c92b7d43b9a1cb96576f0f0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1481289185575961337, guid: f385288f9c92b7d43b9a1cb96576f0f0,
         type: 3}
@@ -213,7 +234,7 @@ PrefabInstance:
     - target: {fileID: 3426471765112579288, guid: 22e44c5c76ca4af489df81bc085dbecd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3426471765112579288, guid: 22e44c5c76ca4af489df81bc085dbecd,
         type: 3}
@@ -267,6 +288,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22e44c5c76ca4af489df81bc085dbecd, type: 3}
+--- !u!4 &299771554 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7220864632568478547, guid: 22e44c5c76ca4af489df81bc085dbecd,
+    type: 3}
+  m_PrefabInstance: {fileID: 211132742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &339161589 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4208904002523767286, guid: 9686b0d5365ad4145baf768dbfb8134d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1672443330}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &415740365 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 45233007402577399, guid: fe43147a8980efc4082b0e6e779ef3e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 915469122}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &431893415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -282,7 +321,7 @@ PrefabInstance:
     - target: {fileID: 4194961678098274201, guid: 7133eea64d83c3d469010e93ed61489d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4194961678098274201, guid: 7133eea64d83c3d469010e93ed61489d,
         type: 3}
@@ -336,6 +375,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7133eea64d83c3d469010e93ed61489d, type: 3}
+--- !u!1 &599956389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3289541590878104556, guid: f385288f9c92b7d43b9a1cb96576f0f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 163301606}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &599956391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599956389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a90a68f0bfd414894f42a03af25449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultScale: {x: 0, y: 0, z: 0}
+  hasFruits: 0
+  plantSettings: {fileID: 11400000, guid: 81e459043a7982e4b9f53ca1c52f600d, type: 2}
+  fruits: {fileID: 0}
+  leaves: {fileID: 1829030619}
+  tickMultiplier: 1
+  growthProgressFruit: 0
+  growthProgressPlant: 100
+  plantSettingsFoldout: 0
 --- !u!1 &646743770
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +435,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &646743772
 MonoBehaviour:
@@ -441,6 +507,39 @@ MonoBehaviour:
   leaves: {fileID: 0}
   fruits: {fileID: 0}
   currentSeason: 0
+--- !u!1 &648483100 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2238906704161106518, guid: fc72772878951a047937b3117434a0fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 987240036}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &648483102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648483100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a90a68f0bfd414894f42a03af25449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultScale: {x: 0, y: 0, z: 0}
+  hasFruits: 0
+  plantSettings: {fileID: 11400000, guid: 81e459043a7982e4b9f53ca1c52f600d, type: 2}
+  fruits: {fileID: 0}
+  leaves: {fileID: 1353292994}
+  tickMultiplier: 1
+  growthProgressFruit: 0
+  growthProgressPlant: 100
+  plantSettingsFoldout: 0
+--- !u!4 &652822229 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3795095928010971173, guid: 7133eea64d83c3d469010e93ed61489d,
+    type: 3}
+  m_PrefabInstance: {fileID: 431893415}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &671471366
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -456,7 +555,7 @@ PrefabInstance:
     - target: {fileID: 9026493794347610059, guid: 8001f8f139096f247b227bd591fce862,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9026493794347610059, guid: 8001f8f139096f247b227bd591fce862,
         type: 3}
@@ -510,81 +609,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8001f8f139096f247b227bd591fce862, type: 3}
---- !u!23 &677936465 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 3442213780928214437, guid: 9686b0d5365ad4145baf768dbfb8134d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1672443330}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &872709545
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1442139255275701387, guid: 052cdca30fd8895489058ee531df46d8,
-        type: 3}
-      propertyPath: m_Name
-      value: bushDecor
-      objectReference: {fileID: 0}
-    - target: {fileID: 2254142527519759921, guid: 052cdca30fd8895489058ee531df46d8,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2254142527519759921, guid: 052cdca30fd8895489058ee531df46d8,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.9055786
-      objectReference: {fileID: 0}
-    - target: {fileID: 2254142527519759921, guid: 052cdca30fd8895489058ee531df46d8,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.6738006
-      objectReference: {fileID: 0}
-    - target: {fileID: 2254142527519759921, guid: 052cdca30fd8895489058ee531df46d8,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 18.67099
-      objectReference: {fileID: 0}
-    - target: {fileID: 2254142527519759921, guid: 052cdca30fd8895489058ee531df46d8,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.6695001
-      objectReference: {fileID: 0}
-    - target: {fileID: 2254142527519759921, guid: 052cdca30fd8895489058ee531df46d8,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.66950005
-      objectReference: {fileID: 0}
-    - target: {fileID: 2254142527519759921, guid: 052cdca30fd8895489058ee531df46d8,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.22752939
-      objectReference: {fileID: 0}
-    - target: {fileID: 2254142527519759921, guid: 052cdca30fd8895489058ee531df46d8,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.22752939
-      objectReference: {fileID: 0}
-    - target: {fileID: 2254142527519759921, guid: 052cdca30fd8895489058ee531df46d8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2254142527519759921, guid: 052cdca30fd8895489058ee531df46d8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2254142527519759921, guid: 052cdca30fd8895489058ee531df46d8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 052cdca30fd8895489058ee531df46d8, type: 3}
 --- !u!1001 &915469122
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -595,7 +619,7 @@ PrefabInstance:
     - target: {fileID: 6493090614676914609, guid: fe43147a8980efc4082b0e6e779ef3e9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6493090614676914609, guid: fe43147a8980efc4082b0e6e779ef3e9,
         type: 3}
@@ -669,7 +693,7 @@ PrefabInstance:
     - target: {fileID: 7169977208792612628, guid: fc72772878951a047937b3117434a0fa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7169977208792612628, guid: fc72772878951a047937b3117434a0fa,
         type: 3}
@@ -735,6 +759,7 @@ GameObject:
   - component: {fileID: 1105596713}
   - component: {fileID: 1105596712}
   - component: {fileID: 1105596715}
+  - component: {fileID: 1105596716}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -841,6 +866,31 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &1105596716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105596711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d655d71651a60b64c993c9ec30acedf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+--- !u!4 &1108345651 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7035723573415992910, guid: 8001f8f139096f247b227bd591fce862,
+    type: 3}
+  m_PrefabInstance: {fileID: 671471366}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1353292994 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8632224495510908729, guid: fc72772878951a047937b3117434a0fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 987240036}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1397403877
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,7 +984,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &1397403880
 MonoBehaviour:
@@ -1091,6 +1141,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1402318859}
   m_CullTransparentMesh: 1
+--- !u!1 &1443771775 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7087870476531906724, guid: fe43147a8980efc4082b0e6e779ef3e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 915469122}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1443771777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443771775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a90a68f0bfd414894f42a03af25449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultScale: {x: 0, y: 0, z: 0}
+  hasFruits: 0
+  plantSettings: {fileID: 11400000, guid: 81e459043a7982e4b9f53ca1c52f600d, type: 2}
+  fruits: {fileID: 0}
+  leaves: {fileID: 415740365}
+  tickMultiplier: 1
+  growthProgressFruit: 0
+  growthProgressPlant: 100
+  plantSettingsFoldout: 0
 --- !u!1 &1542151247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,8 +1244,62 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1557072596 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3565918274335853859, guid: 7133eea64d83c3d469010e93ed61489d,
+    type: 3}
+  m_PrefabInstance: {fileID: 431893415}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1557072598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557072596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a90a68f0bfd414894f42a03af25449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultScale: {x: 0, y: 0, z: 0}
+  hasFruits: 0
+  plantSettings: {fileID: 11400000, guid: 873ea6821ca4dc54cb0d02faf02ed391, type: 2}
+  fruits: {fileID: 652822229}
+  leaves: {fileID: 1688391906}
+  tickMultiplier: 1
+  growthProgressFruit: 0
+  growthProgressPlant: 100
+  plantSettingsFoldout: 1
+--- !u!1 &1622717217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2649969558948986466, guid: 22e44c5c76ca4af489df81bc085dbecd,
+    type: 3}
+  m_PrefabInstance: {fileID: 211132742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1622717219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622717217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a90a68f0bfd414894f42a03af25449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultScale: {x: 0, y: 0, z: 0}
+  hasFruits: 0
+  plantSettings: {fileID: 11400000, guid: 27c70537e5da72f45b640c974abc25e3, type: 2}
+  fruits: {fileID: 0}
+  leaves: {fileID: 299771554}
+  tickMultiplier: 1
+  growthProgressFruit: 0
+  growthProgressPlant: 100
+  plantSettingsFoldout: 1
 --- !u!1001 &1672443330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1243,6 +1374,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9686b0d5365ad4145baf768dbfb8134d, type: 3}
+--- !u!4 &1688391906 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8941344487678003724, guid: 7133eea64d83c3d469010e93ed61489d,
+    type: 3}
+  m_PrefabInstance: {fileID: 431893415}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1717620302 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8274780682588779487, guid: 9686b0d5365ad4145baf768dbfb8134d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1672443330}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1827106339
 GameObject:
   m_ObjectHideFlags: 0
@@ -1378,28 +1521,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1827106339}
   m_CullTransparentMesh: 1
+--- !u!4 &1829030619 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4499240691666217229, guid: f385288f9c92b7d43b9a1cb96576f0f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 163301606}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1881065748 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8575875500974221017, guid: 9686b0d5365ad4145baf768dbfb8134d,
     type: 3}
   m_PrefabInstance: {fileID: 1672443330}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1881065750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1881065748}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fa1c95ca1cd0d24b93f3745acef2461, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  plantSettings: {fileID: 11400000, guid: 4a7d62b351f0d6246a9cc5cd0db50dfd, type: 2}
-  leaves: {fileID: 150517302}
-  fruits: {fileID: 677936465}
-  currentSeason: 0
 --- !u!114 &1881065752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1412,12 +1545,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70a90a68f0bfd414894f42a03af25449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultScale: {x: 0, y: 0, z: 0}
+  hasFruits: 1
   plantSettings: {fileID: 11400000, guid: 4a7d62b351f0d6246a9cc5cd0db50dfd, type: 2}
-  fruits:
-  - {fileID: 677936465}
-  leaves:
-  - {fileID: 150517302}
-  tickMultiplier: 0
+  fruits: {fileID: 1717620302}
+  leaves: {fileID: 339161589}
+  tickMultiplier: 1
+  growthProgressFruit: 0
+  growthProgressPlant: 100
   plantSettingsFoldout: 1
 --- !u!1 &1966564334
 GameObject:
@@ -1514,7 +1649,7 @@ RectTransform:
   - {fileID: 1827106340}
   - {fileID: 1402318860}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1587,5 +1722,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

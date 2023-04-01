@@ -27,7 +27,7 @@ public class SeasonsManager : MonoBehaviour
             if (currentSeason != GetSeason(e.date.y))
             {
                 currentSeason = GetSeason(e.date.y);
-                OnNewSeason(this, new OnNewSeasonEventArgs { season = currentSeason, day = e.date.z }); // ToDo calculate day in season not in month
+                //OnNewSeason(this, new OnNewSeasonEventArgs { season = currentSeason, day = e.date.z }); // ToDo calculate day in season not in month
             }
             //UpdateColor(e.date.z, e.date.y);
         };
@@ -40,6 +40,6 @@ public class SeasonsManager : MonoBehaviour
         float time = Mathf.Lerp(0,1, (day + t)  / 60f); // current day / days in season
         //Debug.Log($"day: {day}, month: {month}, time: {time}");
         leaves.material.color = plantSettings.seasonSettings[GetSeason(month)].leavesColorScheme.Evaluate(time);
-        fruits.material.color = plantSettings.seasonSettings[GetSeason(month)].fruitsColorScheme.Evaluate(time); // change based on growth stage not day
+        fruits.material.color = plantSettings.fruitsColorScheme.Evaluate(time); // change based on growth stage not day
     }
 }
