@@ -7,14 +7,14 @@ using UnityEngine;
 public class PlantController : MonoBehaviour
 {
     public static int MAX_GROWTH = 100;
-    public Vector3 defaultScale;
+    public Vector3 defaultScale; //used for growth, not optimal
 
     public bool hasFruits = false;
     public PlantSettings plantSettings;
     PlantSettings.SeasonSettings currentSeasonSettings;
     [ConditionalHide("hasFruits")]
-    public Transform fruits;
-    public Transform leaves;
+    public Transform fruits; //fruits object or parent of multiple fruit objects
+    public Transform leaves;//leaves object or parent of multiple leaves objects
 
     private int currentSeason = 0;
     private int dayInSeason = 0;
@@ -22,12 +22,12 @@ public class PlantController : MonoBehaviour
     public int tickMultiplier = 1;
 
     [ConditionalHide("hasFruits"), Range(0, 100)]
-    public int growthProgressFruit = 0;// should be out of 100
+    public int growthProgressFruit = 0;// out of 100
     [Range(0, 100), SerializeField]
-    private int growthProgressPlant = 100;// should be out of 100
+    private int growthProgressPlant = 100;// out of 100
 
     [HideInInspector]
-    public bool plantSettingsFoldout;
+    public bool plantSettingsFoldout; // for custom editor, making folding of settings work
 
     void Start()
     {
@@ -49,15 +49,13 @@ public class PlantController : MonoBehaviour
             if (tickMultiplier != 0)
             {
                 // Update plant growth
-                if (currentSeasonSettings.growthSpeed != 0 && IsGrowing() &&
-                    tick % (currentSeasonSettings.growthSpeed * tickMultiplier) == 0)
+                if (IsGrowing() && tick % (currentSeasonSettings.growthSpeed * tickMultiplier) == 0)
                 {
                     growthProgressPlant++;
                     UpdatePlantGrowth();
                 }
                 // Update fruit growth
-                else if (currentSeasonSettings.fruitingSpeed != 0 && IsFruiting() &&
-                    tick % (currentSeasonSettings.fruitingSpeed * tickMultiplier) == 0)
+                else if (IsFruiting() && tick % (currentSeasonSettings.fruitingSpeed * tickMultiplier) == 0)
                 {
                     growthProgressFruit++;
                     UpdateFruitGrowth();
@@ -66,6 +64,7 @@ public class PlantController : MonoBehaviour
             if (tick <= 100) tick -= 100;
         };
     }
+
     private void Initiate()
     {
         currentSeasonSettings = plantSettings.seasonSettings[currentSeason];
@@ -73,7 +72,7 @@ public class PlantController : MonoBehaviour
         UpdateGrowth();
     }
     private void UpdateLeavesColors()
-    { // separate leaves and fruits
+    {
         if (leaves == null) return;
         if (!currentSeasonSettings.haveFoliage)
         {
@@ -89,11 +88,18 @@ public class PlantController : MonoBehaviour
 
         SetObjectsColor(newColor, leaves);
     }
+    /// <summary>
+    /// Activate or deactivate leaves and fruits based on state entered.
+    /// </summary>
+    /// <param name="state">Bool that will be set as active status.</param>
     private void SetFoliageActive(bool state)
     {
         leaves.gameObject.SetActive(state);
         fruits.gameObject.SetActive(state);
     }
+    /// <summary>
+    /// Updates color of fruit based on assigned gradiend color and growth progress.
+    /// </summary>
     private void UpdateFruitColors()
     {
         if (fruits == null || !fruits.gameObject.activeSelf) return;
@@ -102,6 +108,11 @@ public class PlantController : MonoBehaviour
 
         SetObjectsColor(newColor, fruits);
     }
+    /// <summary>
+    /// Sets color of object or child of object.
+    /// </summary>
+    /// <param name="color">New color.</param>
+    /// <param name="objects">Obect to change or parent of objects to change.</param>
     private void SetObjectsColor(Color color, Transform objects)
     { //ToDo add some randomness 
         if (objects.childCount == 0) 
@@ -124,19 +135,20 @@ public class PlantController : MonoBehaviour
     {
         UpdatePlantGrowth();
         UpdateFruitGrowth();
-        //Debug.Log("Update growth");
     }
     private void UpdatePlantGrowth()
     {
         float newScale = Mathf.Lerp(0, defaultScale.x, growthProgressPlant / (float)MAX_GROWTH);
         transform.localScale = new Vector3(defaultScale.x, newScale, newScale);
-        //Debug.Log("Update plant growth");
     }
     private void UpdateFruitGrowth()
     {
         UpdateFruitColors();
-        //Debug.Log("Update fruit growth");
     }
+    /// <summary>
+    /// Check if plant is still growing.
+    /// </summary>
+    /// <returns>True if it's growing otherwise false.</returns>
     private bool IsGrowing()
     {
         bool isPlantFullyGrown = growthProgressPlant >= MAX_GROWTH;
@@ -144,16 +156,25 @@ public class PlantController : MonoBehaviour
 
         return isGrowingThisSeason && !isPlantFullyGrown;
     }
+    /// <summary>
+    /// Check if plant is fruiting.
+    /// </summary>
+    /// <returns>True if fruit is growing and parent plant is fully grown, otherwise false.</returns>
     private bool IsFruiting()
     {
         bool isPlantFullyGrown = growthProgressPlant >= MAX_GROWTH;
-        bool isFruitFullyGrown = growthProgressFruit < MAX_GROWTH;
+        bool isFruitFullyGrown = growthProgressFruit >= MAX_GROWTH;
         bool isFruitingThisSeason = currentSeasonSettings.fruitingSpeed > 0;
 
-        return  isFruitingThisSeason && isFruitFullyGrown && isPlantFullyGrown;
+        return  isFruitingThisSeason && !isFruitFullyGrown && isPlantFullyGrown;
     }
+    /// <summary>
+    /// Calculates what day in season it is based on date
+    /// </summary>
+    /// <param name="date">Current date.</param>
+    /// <returns>Day in season.</returns>
     private int GetDayInSeason(int3 date)
-    {//ToDo all
+    {
         int day = date.z;
         int month = date.y;
         int daysInMonth = ClockHnadler.DAYS_IN_MONTH;

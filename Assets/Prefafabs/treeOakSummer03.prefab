@@ -344,6 +344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1481289185575961337}
+  - component: {fileID: 2590462281033144583}
   m_Layer: 0
   m_Name: treeOakSummer03
   m_TagString: Untagged
@@ -368,6 +369,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2590462281033144583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3289541590878104556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a90a68f0bfd414894f42a03af25449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultScale: {x: 0, y: 0, z: 0}
+  hasFruits: 0
+  plantSettings: {fileID: 11400000, guid: 81e459043a7982e4b9f53ca1c52f600d, type: 2}
+  fruits: {fileID: 0}
+  leaves: {fileID: 4499240691666217229}
+  tickMultiplier: 1
+  growthProgressFruit: 0
+  growthProgressPlant: 100
+  plantSettingsFoldout: 0
 --- !u!1 &3761452155182373808
 GameObject:
   m_ObjectHideFlags: 0

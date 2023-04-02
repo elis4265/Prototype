@@ -77,7 +77,7 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     haveFoliage: 1
-  - fruitingSpeed: 10
+  - fruitingSpeed: 3
     growthSpeed: 1
     resourceAmount: 0
     leavesColorScheme:

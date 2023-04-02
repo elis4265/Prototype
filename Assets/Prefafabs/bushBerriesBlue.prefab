@@ -92,6 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4194961678098274201}
+  - component: {fileID: 1661567178623626661}
   m_Layer: 0
   m_Name: bushBerriesBlue
   m_TagString: Untagged
@@ -116,6 +117,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1661567178623626661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3565918274335853859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a90a68f0bfd414894f42a03af25449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultScale: {x: 0, y: 0, z: 0}
+  hasFruits: 1
+  plantSettings: {fileID: 11400000, guid: 873ea6821ca4dc54cb0d02faf02ed391, type: 2}
+  fruits: {fileID: 3795095928010971173}
+  leaves: {fileID: 8941344487678003724}
+  tickMultiplier: 1
+  growthProgressFruit: 0
+  growthProgressPlant: 100
+  plantSettingsFoldout: 0
 --- !u!1 &6369920142721514839
 GameObject:
   m_ObjectHideFlags: 0
