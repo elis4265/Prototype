@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu()]
@@ -21,6 +22,8 @@ public class PlantSettings : ScriptableObject
         [ConditionalHide("hasFruits")]
         [Range(0, 10)]
         public int fruitingSpeed;
+        [ConditionalHide("hasFruits")]
+        public int fruitRegrowCooldown = 10;
         [Range(0, 10)]
         public int growthSpeed;
         public int resourceAmount = 0;

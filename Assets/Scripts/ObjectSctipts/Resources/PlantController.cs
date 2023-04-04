@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEditor.TerrainTools;
 using UnityEngine;
+
 // To do, set random value as offset when instantiating plants and apply it to leaves gradient value calculation (t in lerp) so its not so uniformal
 public class PlantController : MonoBehaviour
 {
+    public enum GrowingStage { Growing, Static, Fruiting, Decaying }
+
+
     public static int MAX_GROWTH = 100;
     public Vector3 defaultScale; //used for growth, not optimal
 
@@ -23,56 +29,93 @@ public class PlantController : MonoBehaviour
 
     [ConditionalHide("hasFruits"), Range(0, 100)]
     public int growthProgressFruit = 0;// out of 100
+    [ConditionalHide("hasFruits")]
+    public int fruitCooldown = 0;// time between collecting and growing again
     [Range(0, 100), SerializeField]
     private int growthProgressPlant = 100;// out of 100
+
+    [SerializeField]
+    private GrowingStage plantStage = GrowingStage.Growing;
 
     [HideInInspector]
     public bool plantSettingsFoldout; // for custom editor, making folding of settings work
 
     void Start()
     {
-        hasFruits = plantSettings.hasFruits;
-        defaultScale = transform.localScale;
         Initiate();
         // for daily updating
         ClockHnadler.OnDayStart += delegate (object sender, ClockHnadler.OnDayStartEventArgs e)
         {
             currentSeason = e.season;
             currentSeasonSettings = plantSettings.seasonSettings[currentSeason];
-            dayInSeason = GetDayInSeason(e.date);
+            dayInSeason = TimeUtils.GetDayInSeason(e.date);
             UpdateLeavesColors();
         };
-        // for fruit growing
+        // Update each tick
         TimeTickSystem.OnTick += delegate (object sender, TimeTickSystem.OnTickEventArgs e)
         {
             tick++;
-            if (tickMultiplier != 0)
-            {
-                // Update plant growth
-                if (IsGrowing() && tick % (currentSeasonSettings.growthSpeed * tickMultiplier) == 0)
-                {
-                    growthProgressPlant++;
-                    UpdatePlantGrowth();
-                }
-                // Update fruit growth
-                else if (IsFruiting() && tick % (currentSeasonSettings.fruitingSpeed * tickMultiplier) == 0)
-                {
-                    growthProgressFruit++;
-                    UpdateFruitGrowth();
-                }
-            }
+            UpdatePlant();
             if (tick <= 100) tick -= 100;
         };
     }
 
     private void Initiate()
     {
+        hasFruits = plantSettings.hasFruits;
+        defaultScale = transform.localScale;
         currentSeasonSettings = plantSettings.seasonSettings[currentSeason];
         UpdateLeavesColors();
-        UpdateGrowth();
+        UpdatePlant();
     }
-    private void UpdateLeavesColors()
+
+    private void UpdatePlant()
     {
+        switch (plantStage)
+        {
+            case GrowingStage.Growing:
+                if (IsGrowing())
+                {
+                    if (fruits.gameObject.activeSelf) fruits.gameObject.SetActive(false);
+                    if (tick % (currentSeasonSettings.growthSpeed * tickMultiplier) == 0)
+                    {
+                        growthProgressPlant++;
+                        UpdatePlantGrowth();
+                    }
+                }
+                else
+                {
+                    if (hasFruits) plantStage = GrowingStage.Fruiting;
+                    else plantStage= GrowingStage.Static;
+                }
+                break;
+            case GrowingStage.Static:
+                //ToDo stay still or randomized events
+                break;
+            case GrowingStage.Fruiting:
+                if (growthProgressFruit >= MAX_GROWTH) plantStage = GrowingStage.Static; // if grown up
+                else if (IsFruiting() && tick % (currentSeasonSettings.fruitingSpeed * tickMultiplier) == 0)
+                {
+                    if (fruitCooldown <= 0)
+                    {
+                        if (!fruits.gameObject.activeSelf) fruits.gameObject.SetActive(true);
+                        growthProgressFruit++;
+                        UpdateFruitGrowth();
+                    }
+                    else fruitCooldown--;
+                }
+                break;
+            case GrowingStage.Decaying:
+                //ToDo dacaying of plant
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    private void UpdateLeavesColors()
+    { //might need change to state mashine if we need to do different behavior based on seasons and plant stage
         if (leaves == null) return;
         if (!currentSeasonSettings.haveFoliage)
         {
@@ -81,18 +124,19 @@ public class PlantController : MonoBehaviour
         }
         else
         {
-            if (!leaves.gameObject.activeSelf) SetFoliageActive(true);
+            if (!leaves.gameObject.activeSelf) SetFoliageActive();
         }
-        float time = Mathf.Lerp(0, 1, dayInSeason / 60f); // current day / days in season
-        Color newColor = currentSeasonSettings.leavesColorScheme.Evaluate(time);
 
-        SetObjectsColor(newColor, leaves);
+        float progress = dayInSeason / (float)TimeUtils.GetDaysInSeason(); // current day / days in season
+        Color newColor = Utils.CalculateColor(currentSeasonSettings.leavesColorScheme, progress);
+
+        ObjectUtils.SetObjectsColor(newColor, leaves);
     }
     /// <summary>
     /// Activate or deactivate leaves and fruits based on state entered.
     /// </summary>
     /// <param name="state">Bool that will be set as active status.</param>
-    private void SetFoliageActive(bool state)
+    private void SetFoliageActive(bool state = true)
     {
         leaves.gameObject.SetActive(state);
         fruits.gameObject.SetActive(state);
@@ -103,46 +147,19 @@ public class PlantController : MonoBehaviour
     private void UpdateFruitColors()
     {
         if (fruits == null || !fruits.gameObject.activeSelf) return;
-        float t = Mathf.Lerp(0, 1, growthProgressFruit / (float)MAX_GROWTH);
-        Color newColor = plantSettings.fruitsColorScheme.Evaluate(t);
+        float progress = growthProgressFruit / (float)MAX_GROWTH;
+        Color newColor = Utils.CalculateColor(plantSettings.fruitsColorScheme, progress);
 
-        SetObjectsColor(newColor, fruits);
+        ObjectUtils.SetObjectsColor(newColor, fruits);
     }
-    /// <summary>
-    /// Sets color of object or child of object.
-    /// </summary>
-    /// <param name="color">New color.</param>
-    /// <param name="objects">Obect to change or parent of objects to change.</param>
-    private void SetObjectsColor(Color color, Transform objects)
-    { //ToDo add some randomness 
-        if (objects.childCount == 0) 
-        {
-            objects.GetComponent<MeshRenderer>().material.color = color;
-        }
-        else
-        {
-            foreach (Transform obj in objects)
-            {
-                for (int i = 0; i < obj.GetComponent<MeshRenderer>().materials.Length; i++)
-                {
-                    obj.GetComponent<MeshRenderer>().materials[i].color = color;
-                }
-            }
-        }
-    }
-
-    private void UpdateGrowth()
-    {
-        UpdatePlantGrowth();
-        UpdateFruitGrowth();
-    }
+    
     private void UpdatePlantGrowth()
-    {
+    { //ToDo needs rework in future for better system, maybe with more models for growing stages
         float newScale = Mathf.Lerp(0, defaultScale.x, growthProgressPlant / (float)MAX_GROWTH);
         transform.localScale = new Vector3(defaultScale.x, newScale, newScale);
     }
     private void UpdateFruitGrowth()
-    {
+    { //In future it would be nice if size of fruits changed as well
         UpdateFruitColors();
     }
     /// <summary>
@@ -152,9 +169,9 @@ public class PlantController : MonoBehaviour
     private bool IsGrowing()
     {
         bool isPlantFullyGrown = growthProgressPlant >= MAX_GROWTH;
-        bool isGrowingThisSeason = currentSeasonSettings.growthSpeed > 0;
+        //bool isGrowingThisSeason = currentSeasonSettings.growthSpeed > 0;
 
-        return isGrowingThisSeason && !isPlantFullyGrown;
+        return !isPlantFullyGrown;
     }
     /// <summary>
     /// Check if plant is fruiting.
@@ -168,32 +185,20 @@ public class PlantController : MonoBehaviour
 
         return  isFruitingThisSeason && !isFruitFullyGrown && isPlantFullyGrown;
     }
-    /// <summary>
-    /// Calculates what day in season it is based on date
-    /// </summary>
-    /// <param name="date">Current date.</param>
-    /// <returns>Day in season.</returns>
-    private int GetDayInSeason(int3 date)
-    {
-        int day = date.z;
-        int month = date.y;
-        int daysInMonth = ClockHnadler.DAYS_IN_MONTH;
-        int monthsInYear = ClockHnadler.MONTHS_IN_YEAR;
-        int seasons = ClockHnadler.SEASONS;
-
-        int monthsInSeason = monthsInYear / seasons;
-        int dayIncrement = daysInMonth * ((month + 1) % monthsInSeason);
-        return day + dayIncrement;
-    }
+    
     public void CollectFruit()
     {
         growthProgressFruit = 0;
         UpdateFruitColors();
+        plantStage = GrowingStage.Fruiting;
+        fruits.gameObject.SetActive(false);
+        fruitCooldown = currentSeasonSettings.fruitRegrowCooldown;
     }
     public void ResetPlantGrowth()
     {
         growthProgressPlant = 0;
-        CollectFruit();
         UpdateFruitColors();
+        CollectFruit();
+        plantStage = GrowingStage.Growing;
     }
 }

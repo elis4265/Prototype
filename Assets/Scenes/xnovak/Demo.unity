@@ -1091,6 +1091,7 @@ MonoBehaviour:
   ligthSourceNight: {fileID: 583524906}
   logInfo: 0
   lightningSettings: {fileID: 11400000, guid: cc22a00bb9db4d0439c0be4b094de74e, type: 2}
+  lightningSettingsFoldout: 1
 --- !u!4 &1098815654
 Transform:
   m_ObjectHideFlags: 0
@@ -1119,6 +1120,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: treeOakSummer02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739358191602860830, guid: fc72772878951a047937b3117434a0fa,
+        type: 3}
+      propertyPath: plantStage
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7169977208792612628, guid: fc72772878951a047937b3117434a0fa,
         type: 3}

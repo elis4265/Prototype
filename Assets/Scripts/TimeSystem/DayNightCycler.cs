@@ -17,8 +17,6 @@ public class DayNightCycler : MonoBehaviour
     private const int NIGHT_LENGHT_MINUTES = NIGHT_LENGHT * MINUTES_IN_HOUR;
     private const int DAY_LENGHT = HOURS_IN_DAY - NIGHT_LENGHT;
     private const int DAY_LENGHT_MINUTES = DAY_LENGHT * MINUTES_IN_HOUR;
-    private const float LIGHT_ANGLE_STEP_NIGHT = 180f / (NIGHT_LENGHT * MINUTES_IN_HOUR);
-    private const float LIGHT_ANGLE_STEP_DAY = 180f / (DAY_LENGHT * MINUTES_IN_HOUR);
 
 
     public enum DayState { Day, Night }
@@ -34,6 +32,8 @@ public class DayNightCycler : MonoBehaviour
     public bool logInfo = false;
 
     public LightningSettings lightningSettings;
+    [HideInInspector]
+    public bool lightningSettingsFoldout = true;
 
     private void Start()
     {
