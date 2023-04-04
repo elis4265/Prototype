@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEditor.TerrainTools;
 using UnityEngine;
-// To do, fruit growth based on tick system
+// To do, set random value as offset when instantiating plants and apply it to leaves gradient value calculation (t in lerp) so its not so uniformal
 public class PlantController : MonoBehaviour
 {
     public static int MAX_GROWTH = 100;

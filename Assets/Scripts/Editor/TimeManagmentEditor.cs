@@ -24,7 +24,12 @@ public class TimeManagmentEditor : Editor
 
         if (GUILayout.Button("UpdateLightPosition"))
         {
-            clockHnadler.dayNightCycler.SetLightAngleBasedOnTime(clockHnadler.time);
+            clockHnadler.dayNightCycler.UpdateLight();
+        }
+        GUILayout.Label("Use only when setuping scene.");
+        if (GUILayout.Button("SetupLightDefaultPosition"))
+        {
+            clockHnadler.dayNightCycler.SetupLightDefaultRotation();
         }
 
     }
