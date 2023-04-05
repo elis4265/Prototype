@@ -8,15 +8,12 @@ public class TimeTickSystem : MonoBehaviour
     public class OnTickEventArgs : EventArgs
     {
         public int tick;
-        public float tickInterval = TICK_TIMER_MAX;
+        public float tickInterval = TimeUtils.TICK_TIMER_MAX;
     }
 
     public static event EventHandler<OnTickEventArgs> OnTick;
-    // how often should tick occur (0.2 == 200ms)
-    private const float TICK_TIMER_MAX = 0.01f;
 
     private float tickTimer;
-    private float tickSpeedMultiplier = 1;
     private int tick;
 
 
@@ -30,16 +27,11 @@ public class TimeTickSystem : MonoBehaviour
     void Update()
     {
         tickTimer += Time.deltaTime;
-        if (tickTimer >= TICK_TIMER_MAX * tickSpeedMultiplier)
+        if (tickTimer >= TimeUtils.TICK_TIMER_MAX * TimeUtils.tickSpeedMultiplier)
         {
-            tickTimer -= TICK_TIMER_MAX * tickSpeedMultiplier;
+            tickTimer -= TimeUtils.TICK_TIMER_MAX * TimeUtils.tickSpeedMultiplier;
             tick++;
             if (OnTick != null) OnTick(this, new OnTickEventArgs { tick = tick });
         }
-    }
-
-    public void SetSpeed(float newSpeed)
-    {
-        tickSpeedMultiplier = newSpeed;
     }
 }

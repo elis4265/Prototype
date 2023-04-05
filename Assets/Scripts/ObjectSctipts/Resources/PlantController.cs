@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.Mathematics;
 using Unity.VisualScripting;
-using UnityEditor.TerrainTools;
 using UnityEngine;
 
 // To do, set random value as offset when instantiating plants and apply it to leaves gradient value calculation (t in lerp) so its not so uniformal
@@ -200,5 +199,17 @@ public class PlantController : MonoBehaviour
         UpdateFruitColors();
         CollectFruit();
         plantStage = GrowingStage.Growing;
+    }
+
+    public void OnClick()
+    {
+        if (hasFruits)
+        { // if plant have fruits
+            CollectFruit();
+        }
+        else
+        {// if plant doesn't have fruits
+
+        }
     }
 }

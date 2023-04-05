@@ -9,23 +9,11 @@ using UnityEngine;
 
 public class DayNightCycler : MonoBehaviour
 {
-    public const int MINUTES_IN_HOUR = 60;
-    public const int HOURS_IN_DAY = 24;
-    private const int MORNING_START = 6;
-    private const int EVENING_START = 20;
-    private const int NIGHT_LENGHT = MORNING_START + (HOURS_IN_DAY - EVENING_START);
-    private const int NIGHT_LENGHT_MINUTES = NIGHT_LENGHT * MINUTES_IN_HOUR;
-    private const int DAY_LENGHT = HOURS_IN_DAY - NIGHT_LENGHT;
-    private const int DAY_LENGHT_MINUTES = DAY_LENGHT * MINUTES_IN_HOUR;
-
-
-    public enum DayState { Day, Night }
-
     /// <summary>
     /// Time format (hh:MM)
     /// </summary>
     public int2 time;
-    public DayState dayStage;
+    public TimeUtils.DayState dayStage;
     public bool timeDay = false;
     public GameObject ligthSourceDay;
     public GameObject ligthSourceNight;
@@ -56,16 +44,16 @@ public class DayNightCycler : MonoBehaviour
 
         switch (dayStage)
         {
-            case DayState.Day:
-                currentStep = (time.x - MORNING_START) * MINUTES_IN_HOUR + time.y;
-                currentStep = currentStep / (float)DAY_LENGHT_MINUTES;
+            case TimeUtils.DayState.Day:
+                currentStep = (time.x - TimeUtils.MORNING_START) * TimeUtils.MINUTES_IN_HOUR + time.y;
+                currentStep = currentStep / (float)TimeUtils.DAY_LENGHT_MINUTES;
                 lightAngle = Mathf.Lerp(0, 180, currentStep);
                 UpdateLight(ligthSourceDay.GetComponent<Light>(), currentStep);
                 break;
-            case DayState.Night:
-                if (time.x > MORNING_START) currentStep = (time.x - EVENING_START) * MINUTES_IN_HOUR + time.y;
-                else currentStep = (HOURS_IN_DAY - EVENING_START + time.x) * MINUTES_IN_HOUR + time.y;
-                currentStep = currentStep / (float)NIGHT_LENGHT_MINUTES;
+            case TimeUtils.DayState.Night:
+                if (time.x > TimeUtils.MORNING_START) currentStep = (time.x - TimeUtils.EVENING_START) * TimeUtils.MINUTES_IN_HOUR + time.y;
+                else currentStep = (TimeUtils.HOURS_IN_DAY - TimeUtils.EVENING_START + time.x) * TimeUtils.MINUTES_IN_HOUR + time.y;
+                currentStep = currentStep / (float)TimeUtils.NIGHT_LENGHT_MINUTES;
                 lightAngle = Mathf.Lerp(-180, 0, currentStep);
                 UpdateLight(ligthSourceNight.GetComponent<Light>(), currentStep);
                 break;
@@ -114,7 +102,7 @@ public class DayNightCycler : MonoBehaviour
     {
         switch (dayStage)
         {
-            case DayState.Day:
+            case TimeUtils.DayState.Day:
                 if (ligthSourceDay.GetComponent<Light>().shadows != LightShadows.Soft)
                 {
                     if (logInfo) Debug.Log("Zacina Den!");
@@ -123,7 +111,7 @@ public class DayNightCycler : MonoBehaviour
                     ligthSourceNight.GetComponent<Light>().shadows = LightShadows.None;
                 }
                 break;
-            case DayState.Night:
+            case TimeUtils.DayState.Night:
                 if (ligthSourceNight.GetComponent<Light>().shadows != LightShadows.Soft)
                 {
                     if (logInfo) Debug.Log("Zacina Noc!");
@@ -135,13 +123,6 @@ public class DayNightCycler : MonoBehaviour
             default:
                 break;
         }
-        //To delete rest
-        if (time.x == MORNING_START && !timeDay)
-        {
-        }
-        else if (time.x == EVENING_START && timeDay)
-        {
-        }
     }
    
     /// <summary>
@@ -150,15 +131,10 @@ public class DayNightCycler : MonoBehaviour
     /// <returns>Returns false if its night otherwise returns true.</returns>
     private bool CheckDay()
     {
-        timeDay = !(time.x < MORNING_START || time.x > EVENING_START);
-        dayStage = timeDay ? DayState.Day : DayState.Night;
+        timeDay = !(time.x < TimeUtils.MORNING_START || time.x >= TimeUtils.EVENING_START);
+        dayStage = timeDay ? TimeUtils.DayState.Day : TimeUtils.DayState.Night;
         return timeDay;
     }
-    /// <summary>
-    /// Returns lenght of day and length of an hour.
-    /// </summary>
-    /// <returns>Return int2 (hours,minutes) time.</returns>
-    public int2 GetDayLenght() { return new int2(HOURS_IN_DAY, MINUTES_IN_HOUR); }
     /// <summary>
     /// Check if lightsources are missing.
     /// </summary>

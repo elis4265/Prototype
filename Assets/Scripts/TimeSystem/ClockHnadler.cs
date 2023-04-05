@@ -6,14 +6,9 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static TimeTickSystem;
 
 public class ClockHnadler : MonoBehaviour
 {
-    public static int DAYS_IN_MONTH = 30;
-    public static int MONTHS_IN_YEAR = 8;
-    public static int SEASONS = 4;
-
     public class OnDayStartEventArgs: EventArgs
     {
         public int3 date;
@@ -33,7 +28,7 @@ public class ClockHnadler : MonoBehaviour
     public DayNightCycler dayNightCycler;
 
     [Range(1,20)]
-    public int timeSpeed = 10;
+    public int timeSpeed = 20;
     public int tick;
     public bool ultraSpeed = false; // only for testing shit like seasons, increments days instead of minutes
 
@@ -74,10 +69,10 @@ public class ClockHnadler : MonoBehaviour
         if (CheckHourLenght())
         {
             hours++;
-            minutes -= dayNightCycler.GetDayLenght().y;
+            minutes -= TimeUtils.GetDayLenght().y;
             if (CheckDayLenght())
             {
-                hours -= dayNightCycler.GetDayLenght().x;
+                hours -= TimeUtils.GetDayLenght().x;
                 IncrementDate();
             }
         }
@@ -88,36 +83,37 @@ public class ClockHnadler : MonoBehaviour
     }
 
     public void SwapPause() { pause = !pause; }
+    public void SwapUltraSpeed() { ultraSpeed = !ultraSpeed; }
     /// <summary>
     /// Checks if there is more minutes then set limit.
     /// </summary>
     /// <returns>True if num of current minues >= num of minues in hour.</returns>
-    private bool CheckHourLenght() { return time.y >= dayNightCycler.GetDayLenght().y; }
+    private bool CheckHourLenght() { return time.y >= TimeUtils.GetDayLenght().y - 1; }
     /// <summary>
     /// Checks if there is more hours then set limit.
     /// </summary>
     /// <returns>True if num of current hours >= num of hours in day.</returns>
-    private bool CheckDayLenght() { return time.x >= dayNightCycler.GetDayLenght().x; }
+    private bool CheckDayLenght() { return time.x >= TimeUtils.GetDayLenght().x - 1; }
     /// <summary>
     /// Checks if there is more days then set limit.
     /// </summary>
     /// <returns>True if num of current days >= num of days in month.</returns>
-    private bool CheckMonthLenght() { return date.z >= DAYS_IN_MONTH; }
+    private bool CheckMonthLenght() { return date.z >= TimeUtils.DAYS_IN_MONTH; }
     /// <summary>
     /// Checks if there is more months then set limit.
     /// </summary>
     /// <returns>True if num of current months >= num of months in year.</returns>
-    private bool CheckYearLenght() { return date.y > MONTHS_IN_YEAR; }
+    private bool CheckYearLenght() { return date.y > TimeUtils.MONTHS_IN_YEAR; }
     private void IncrementDate(int incrementDays = 1)
     {
         date.z++;
         if (CheckMonthLenght()) 
         {
-            date.z -= DAYS_IN_MONTH;
+            date.z -= TimeUtils.DAYS_IN_MONTH;
             date.y++;
             if (CheckYearLenght())
             {
-                date.y -= MONTHS_IN_YEAR;
+                date.y -= TimeUtils.MONTHS_IN_YEAR;
                 date.x++;
             }
         }
@@ -129,6 +125,6 @@ public class ClockHnadler : MonoBehaviour
         if (!americanDateFormat)dateTextField.text = $"{date.z} / {date.y} / {date.x}";
         else dateTextField.text = $"{date.y} / {date.z} / {date.x}";
     }
-    private int GetSeason(int month) { return (month + 1) / (MONTHS_IN_YEAR / SEASONS) - 1; }  // 2 months per seasons, needs better calculation to be universal
-
+    private int GetSeason(int month) { return (month + 1) / TimeUtils.GetMonthsPerSeason() - 1; }  // 2 months per seasons, needs better calculation to be universal
+    public void SetSpeed(int speed) { timeSpeed = Mathf.Max(1, 20 - speed); }
 }

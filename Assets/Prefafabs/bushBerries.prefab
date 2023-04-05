@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8274780682588779487}
   - component: {fileID: 6722990057935888930}
   - component: {fileID: 3442213780928214437}
+  - component: {fileID: 7186377260139080450}
   m_Layer: 0
   m_Name: bubbles
   m_TagString: Untagged
@@ -83,6 +84,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7186377260139080450
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2168920882390668973}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4082527372785889573, guid: 567f1e4e611a89e43b31ef64d660cff4, type: 3}
 --- !u!1 &6148140752890015158
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +109,7 @@ GameObject:
   - component: {fileID: 4208904002523767286}
   - component: {fileID: 7019966689563660910}
   - component: {fileID: 4925357068367855411}
+  - component: {fileID: 8680593142604796059}
   m_Layer: 0
   m_Name: leaves bush
   m_TagString: Untagged
@@ -166,6 +182,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8680593142604796059
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6148140752890015158}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3232619312131522030, guid: 567f1e4e611a89e43b31ef64d660cff4, type: 3}
 --- !u!1 &8575875500974221017
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,5 +249,7 @@ MonoBehaviour:
   leaves: {fileID: 4208904002523767286}
   tickMultiplier: 1
   growthProgressFruit: 0
+  fruitCooldown: 0
   growthProgressPlant: 100
+  plantStage: 0
   plantSettingsFoldout: 0

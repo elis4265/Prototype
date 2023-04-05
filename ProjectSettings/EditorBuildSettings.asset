@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/TestingTerrain_ondreakova.unity
+  - enabled: 0
+    path: Assets/Scenes/xondreakova/x_ondreakova_1_TerrainTesting.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/xnovak/Demo.unity
+    guid: 6aa751e0f9450c44a92e8a93827cb419
   m_configObjects: {}
