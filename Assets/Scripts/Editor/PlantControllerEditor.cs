@@ -10,7 +10,6 @@ public class PlantControllerEditor : Editor
     PlantController plantController;
     Editor plantSettingsEditor;
 
-
     public override void OnInspectorGUI()
     {
         using (var check = new EditorGUI.ChangeCheckScope())

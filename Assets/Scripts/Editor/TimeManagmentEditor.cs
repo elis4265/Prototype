@@ -7,10 +7,6 @@ using UnityEngine;
 [CustomEditor(typeof(ClockHnadler))]
 public class TimeManagmentEditor : Editor
 {
-    private void OnEnable()
-    {
-    }
-
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();

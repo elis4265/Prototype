@@ -129,7 +129,7 @@ public class PlantController : MonoBehaviour
         float progress = dayInSeason / (float)TimeUtils.GetDaysInSeason(); // current day / days in season
         Color newColor = Utils.CalculateColor(currentSeasonSettings.leavesColorScheme, progress);
 
-        ObjectUtils.SetObjectsColor(newColor, leaves);
+        ObjectUtils.SetObjectsColor(newColor, leaves); //ToDo add some randomness to progress
     }
     /// <summary>
     /// Activate or deactivate leaves and fruits based on state entered.
@@ -149,7 +149,7 @@ public class PlantController : MonoBehaviour
         float progress = growthProgressFruit / (float)MAX_GROWTH;
         Color newColor = Utils.CalculateColor(plantSettings.fruitsColorScheme, progress);
 
-        ObjectUtils.SetObjectsColor(newColor, fruits);
+        ObjectUtils.SetObjectsColor(newColor, fruits); //ToDo add some randomness to progress
     }
     
     private void UpdatePlantGrowth()

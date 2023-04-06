@@ -24,7 +24,7 @@ public static class TimeUtils
     public const int DAY_LENGHT = HOURS_IN_DAY - NIGHT_LENGHT;
     public const int DAY_LENGHT_MINUTES = DAY_LENGHT * MINUTES_IN_HOUR;
     public enum DayState { Day, Night }
-    public enum Weather { Clear, Cloudy, Rain, Storm}
+    public enum Weather { Clear, Cloudy, Rain, Storm, Foggy, Snow, SnowStorm }
 
     /// <summary>
     /// Calculates what day in season it is based on date

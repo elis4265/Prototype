@@ -1,0 +1,208 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b97d85d45bda8042ad95ba1aeb92ea3, type: 3}
+  m_Name: WeatherSettings
+  m_EditorClassIdentifier: 
+  particleMaterialRain: {fileID: 2100000, guid: bda64b4c21cfabf428482f61d1636c9d,
+    type: 2}
+  particleMaterialClouds: {fileID: 2100000, guid: ac85b43e7d84cd04db1916ee2ad86e9b,
+    type: 2}
+  weathers:
+  - name: Clear
+    useParticlesRain: 0
+    useParticlesCloud: 0
+    rainHeight: 50
+    particleProperitesRain:
+      particleSprite: {fileID: 0}
+      size: 1
+      lifeTime: 5
+      fallSpeed: 0
+      rateOverTime: 50
+      hasVelocity: 0
+      orbitalVelocity: {x: 0, y: 0, z: 0}
+      linearVelocity: {x: 0, y: 0, z: 0}
+      hasRotation: 0
+      rotationOverLifetime: 0
+    cloudHeight: 10
+    particleProperitesCloud:
+      particleSprite: {fileID: 0}
+      size: 1
+      lifeTime: 5
+      fallSpeed: 0
+      rateOverTime: 50
+      hasVelocity: 0
+      orbitalVelocity: {x: 0, y: 0, z: 0}
+      linearVelocity: {x: 0, y: 0, z: 0}
+      hasRotation: 0
+      rotationOverLifetime: 0
+  - name: Cloudy
+    useParticlesRain: 0
+    useParticlesCloud: 1
+    rainHeight: 50
+    particleProperitesRain:
+      particleSprite: {fileID: 0}
+      size: 1
+      lifeTime: 5
+      fallSpeed: 0
+      rateOverTime: 50
+      hasVelocity: 0
+      orbitalVelocity: {x: 0, y: 0, z: 0}
+      linearVelocity: {x: 0, y: 0, z: 0}
+      hasRotation: 0
+      rotationOverLifetime: 0
+    cloudHeight: 10
+    particleProperitesCloud:
+      particleSprite: {fileID: 2800000, guid: 45ee6d33e45bb1746a6d377f5c378834, type: 3}
+      size: 1
+      lifeTime: 5
+      fallSpeed: 0
+      rateOverTime: 50
+      hasVelocity: 0
+      orbitalVelocity: {x: 0, y: 0, z: 0}
+      linearVelocity: {x: 0, y: 0, z: 0}
+      hasRotation: 0
+      rotationOverLifetime: 0
+  - name: Rain
+    useParticlesRain: 1
+    useParticlesCloud: 0
+    rainHeight: 50
+    particleProperitesRain:
+      particleSprite: {fileID: 2800000, guid: dd6cbd84f41732e4089dd54865cb0398, type: 3}
+      size: 1
+      lifeTime: 5
+      fallSpeed: 0
+      rateOverTime: 50
+      hasVelocity: 0
+      orbitalVelocity: {x: 0, y: 0, z: 0}
+      linearVelocity: {x: 0, y: 0, z: 0}
+      hasRotation: 0
+      rotationOverLifetime: 0
+    cloudHeight: 10
+    particleProperitesCloud:
+      particleSprite: {fileID: 0}
+      size: 1
+      lifeTime: 5
+      fallSpeed: 0
+      rateOverTime: 50
+      hasVelocity: 0
+      orbitalVelocity: {x: 0, y: 0, z: 0}
+      linearVelocity: {x: 0, y: 0, z: 0}
+      hasRotation: 0
+      rotationOverLifetime: 0
+  - name: Storm
+    useParticlesRain: 1
+    useParticlesCloud: 1
+    rainHeight: 50
+    particleProperitesRain:
+      particleSprite: {fileID: 2800000, guid: dd6cbd84f41732e4089dd54865cb0398, type: 3}
+      size: 5
+      lifeTime: 10
+      fallSpeed: 0
+      rateOverTime: 50
+      hasVelocity: 0
+      orbitalVelocity: {x: 11, y: 12, z: 13}
+      linearVelocity: {x: 21, y: 22, z: 23}
+      hasRotation: 1
+      rotationOverLifetime: 13
+    cloudHeight: 10
+    particleProperitesCloud:
+      particleSprite: {fileID: 2800000, guid: 45ee6d33e45bb1746a6d377f5c378834, type: 3}
+      size: 1
+      lifeTime: 5
+      fallSpeed: 0
+      rateOverTime: 50
+      hasVelocity: 0
+      orbitalVelocity: {x: 0, y: 0, z: 0}
+      linearVelocity: {x: 0, y: 0, z: 0}
+      hasRotation: 0
+      rotationOverLifetime: 0
+  - name: Foggy
+    useParticlesRain: 0
+    useParticlesCloud: 1
+    rainHeight: 50
+    particleProperitesRain:
+      particleSprite: {fileID: 0}
+      size: 1
+      lifeTime: 5
+      fallSpeed: 0
+      rateOverTime: 50
+      hasVelocity: 0
+      orbitalVelocity: {x: 0, y: 0, z: 0}
+      linearVelocity: {x: 0, y: 0, z: 0}
+      hasRotation: 0
+      rotationOverLifetime: 0
+    cloudHeight: 10
+    particleProperitesCloud:
+      particleSprite: {fileID: 0}
+      size: 1
+      lifeTime: 5
+      fallSpeed: 0
+      rateOverTime: 50
+      hasVelocity: 0
+      orbitalVelocity: {x: 0, y: 0, z: 0}
+      linearVelocity: {x: 0, y: 0, z: 0}
+      hasRotation: 0
+      rotationOverLifetime: 0
+  - name: Snow
+    useParticlesRain: 1
+    useParticlesCloud: 0
+    rainHeight: 50
+    particleProperitesRain:
+      particleSprite: {fileID: 2800000, guid: 71c97477e86b01849b2eb44a59769090, type: 3}
+      size: 1
+      lifeTime: 5
+      fallSpeed: 0
+      rateOverTime: 50
+      hasVelocity: 0
+      orbitalVelocity: {x: 0, y: 0, z: 0}
+      linearVelocity: {x: 0, y: 0, z: 0}
+      hasRotation: 0
+      rotationOverLifetime: 0
+    cloudHeight: 10
+    particleProperitesCloud:
+      particleSprite: {fileID: 0}
+      size: 1
+      lifeTime: 5
+      fallSpeed: 0
+      rateOverTime: 50
+      hasVelocity: 0
+      orbitalVelocity: {x: 0, y: 0, z: 0}
+      linearVelocity: {x: 0, y: 0, z: 0}
+      hasRotation: 0
+      rotationOverLifetime: 0
+  - name: SnowStorm
+    useParticlesRain: 1
+    useParticlesCloud: 1
+    rainHeight: 50
+    particleProperitesRain:
+      particleSprite: {fileID: 2800000, guid: 71c97477e86b01849b2eb44a59769090, type: 3}
+      size: 1
+      lifeTime: 5
+      fallSpeed: 0
+      rateOverTime: 50
+      hasVelocity: 0
+      orbitalVelocity: {x: 0, y: 0, z: 0}
+      linearVelocity: {x: 0, y: 0, z: 0}
+      hasRotation: 0
+      rotationOverLifetime: 0
+    cloudHeight: 10
+    particleProperitesCloud:
+      particleSprite: {fileID: 0}
+      size: 1
+      lifeTime: 5
+      fallSpeed: 0
+      rateOverTime: 50
+      hasVelocity: 0
+      orbitalVelocity: {x: 0, y: 0, z: 0}
+      linearVelocity: {x: 0, y: 0, z: 0}
+      hasRotation: 0
+      rotationOverLifetime: 0

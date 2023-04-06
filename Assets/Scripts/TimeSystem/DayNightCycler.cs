@@ -27,8 +27,11 @@ public class DayNightCycler : MonoBehaviour
     {
         timeDay = CheckDay();
         //reset shadows
-        ligthSourceDay.GetComponent<Light>().shadows = LightShadows.None;
-        ligthSourceNight.GetComponent<Light>().shadows = LightShadows.None;
+        if (CheckLightObject())
+        {
+            ligthSourceDay.GetComponent<Light>().shadows = LightShadows.None;
+            ligthSourceNight.GetComponent<Light>().shadows = LightShadows.None;
+        }
     }
 
     public void UpdateLight()
@@ -109,6 +112,9 @@ public class DayNightCycler : MonoBehaviour
 
                     ligthSourceDay.GetComponent<Light>().shadows = LightShadows.Soft;
                     ligthSourceNight.GetComponent<Light>().shadows = LightShadows.None;
+
+                    ligthSourceDay.SetActive(true);
+                    ligthSourceNight.SetActive(false);
                 }
                 break;
             case TimeUtils.DayState.Night:
@@ -118,6 +124,9 @@ public class DayNightCycler : MonoBehaviour
 
                     ligthSourceDay.GetComponent<Light>().shadows = LightShadows.None;
                     ligthSourceNight.GetComponent<Light>().shadows = LightShadows.Soft;
+
+                    ligthSourceDay.SetActive(false);
+                    ligthSourceNight.SetActive(true);
                 }
                 break;
             default:
