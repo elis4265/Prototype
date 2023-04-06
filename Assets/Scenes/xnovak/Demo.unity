@@ -637,10 +637,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time:
-    x: 19
+    x: 10
     y: 0
   logTimeInfo: 0
-  pause: 0
+  pause: 1
   americanDateFormat: 0
   timeTextField: {fileID: 38541198}
   dateTextField: {fileID: 1724835431}
@@ -2292,12 +2292,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b31a8427a796a4742bf55aaa1f8d801b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  urpdata: {fileID: 1173353451}
+  urpData: {fileID: 0}
   gameManager: {fileID: 554923280}
   dayNightCycler: {fileID: 1098815653}
   weatherSettings: {fileID: 11400000, guid: a37ebb6b3a7b38e4ab4cc73d08fc3d6d, type: 2}
   settingsFoldout: 1
   currentWeather: 0
+  wind: {x: 0, y: 0}
+  windMultiplier: 50
   cloudSettings:
     resolution: 256
     scale: 10
@@ -2305,6 +2307,7 @@ MonoBehaviour:
   terrain: {fileID: 1185165297}
   particlesRain: {fileID: 2134813417}
   particlesCloud: {fileID: 1756155447}
+  areCloudsOn: 0
 --- !u!1 &821353872
 GameObject:
   m_ObjectHideFlags: 0
@@ -4613,7 +4616,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
+  - {fileID: 2100000, guid: ac85b43e7d84cd04db1916ee2ad86e9b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4680,7 +4683,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -5232,7 +5235,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 50000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -10170,7 +10173,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
+  - {fileID: 2100000, guid: bda64b4c21cfabf428482f61d1636c9d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10789,7 +10792,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 50000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0

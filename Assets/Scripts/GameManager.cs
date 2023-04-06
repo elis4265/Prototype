@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         dayNightCycler.ligthSourceDay.GetComponent<UniversalAdditionalLightData>().lightCookieSize = new Vector2(ObjectUtils.GetObjectSize(terrain).x, ObjectUtils.GetObjectSize(terrain).z);
-        dayNightCycler.ligthSourceDay.GetComponent<UniversalAdditionalLightData>().lightCookieSize = new Vector2(ObjectUtils.GetObjectSize(terrain).x, ObjectUtils.GetObjectSize(terrain).z);
+        dayNightCycler.ligthSourceNight.GetComponent<UniversalAdditionalLightData>().lightCookieSize = new Vector2(ObjectUtils.GetObjectSize(terrain).x, ObjectUtils.GetObjectSize(terrain).z);
 
         Utils.SetupWeatherDropDown(weatherDropdown);
         weatherDropdown.GetComponent<TMP_Dropdown>().value = (int)weatherController.currentWeather;

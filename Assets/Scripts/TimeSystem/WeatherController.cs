@@ -8,7 +8,7 @@ using UnityEngine.Rendering.Universal;
 
 public class WeatherController : MonoBehaviour
 {
-    public UniversalAdditionalLightData urpdata;
+    public UniversalAdditionalLightData urpData;
 
     public GameManager gameManager;
     public DayNightCycler dayNightCycler;
@@ -17,6 +17,8 @@ public class WeatherController : MonoBehaviour
     public bool settingsFoldout;
 
     public TimeUtils.Weather currentWeather = TimeUtils.Weather.Clear;
+    public Vector2 wind = Vector2.zero;
+    public float windMultiplier = 50; // bigger number slower wind
     public CloudSettings cloudSettings;
 
     public GameObject terrain;
@@ -24,7 +26,7 @@ public class WeatherController : MonoBehaviour
     public ParticleSystem particlesCloud;
 
     private Texture2D cloudTexture;
-
+    public bool areCloudsOn = false;
     void Start()
     {
         //SetupParticleObjectSizes();
@@ -34,17 +36,26 @@ public class WeatherController : MonoBehaviour
         {
             currentWeather = (TimeUtils.Weather)UnityEngine.Random.Range(0, Enum.GetNames(typeof(TimeUtils.Weather)).Length);
             UpdateWeather();
+            RandomizeWind();
         };
     }
 
     void Update()
     {
-
+        if(areCloudsOn)
+        {
+            if (wind != Vector2.zero)
+            {
+                cloudSettings.offset += wind / windMultiplier;
+                cloudTexture = GenerateClouds(cloudSettings);
+                UpdateClouds(true);
+            }
+        }
     }
     public void UpdateWeather()
     {
         SetupWeather(weatherSettings.weathers[(int)currentWeather]);
-        cloudTexture = GenerateClouds(cloudSettings);
+        if (areCloudsOn) cloudTexture = GenerateClouds(cloudSettings);
         switch (currentWeather)
         {// idk if this is needed
             case TimeUtils.Weather.Clear:
@@ -126,6 +137,7 @@ public class WeatherController : MonoBehaviour
     }
     private void UpdateClouds(bool cloudsOn = false)
     {
+        areCloudsOn = cloudsOn;
         if (cloudsOn)
         {
             if (/*dayNightCycler.ligthSourceDay.GetComponent<Light>().cookie == null*/true)
@@ -143,6 +155,10 @@ public class WeatherController : MonoBehaviour
     private Texture2D GenerateClouds(CloudSettings cls)
     {
         return CloudGenerator.GenerateTexture(cls.resolution, cls.scale, cls.offset);
+    }
+    private void RandomizeWind()
+    { // probbably needs more suitable version of wind randomness
+        wind = new Vector2(UnityEngine.Random.Range(-1,1), UnityEngine.Random.Range(-1, 1));
     }
 }
 [System.Serializable]

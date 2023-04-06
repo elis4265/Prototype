@@ -46,7 +46,7 @@ MonoBehaviour:
       rotationOverLifetime: 0
   - name: Cloudy
     useParticlesRain: 0
-    useParticlesCloud: 1
+    useParticlesCloud: 0
     rainHeight: 50
     particleProperitesRain:
       particleSprite: {fileID: 0}
@@ -78,9 +78,9 @@ MonoBehaviour:
     particleProperitesRain:
       particleSprite: {fileID: 2800000, guid: dd6cbd84f41732e4089dd54865cb0398, type: 3}
       size: 1
-      lifeTime: 5
-      fallSpeed: 0
-      rateOverTime: 50
+      lifeTime: 2
+      fallSpeed: 5
+      rateOverTime: 4000
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -100,14 +100,14 @@ MonoBehaviour:
       rotationOverLifetime: 0
   - name: Storm
     useParticlesRain: 1
-    useParticlesCloud: 1
+    useParticlesCloud: 0
     rainHeight: 50
     particleProperitesRain:
       particleSprite: {fileID: 2800000, guid: dd6cbd84f41732e4089dd54865cb0398, type: 3}
-      size: 5
-      lifeTime: 10
-      fallSpeed: 0
-      rateOverTime: 50
+      size: 2
+      lifeTime: 0.5
+      fallSpeed: 50
+      rateOverTime: 5000
       hasVelocity: 0
       orbitalVelocity: {x: 11, y: 12, z: 13}
       linearVelocity: {x: 21, y: 22, z: 23}
@@ -142,16 +142,16 @@ MonoBehaviour:
       rotationOverLifetime: 0
     cloudHeight: 10
     particleProperitesCloud:
-      particleSprite: {fileID: 0}
-      size: 1
-      lifeTime: 5
+      particleSprite: {fileID: 2800000, guid: 45ee6d33e45bb1746a6d377f5c378834, type: 3}
+      size: 15
+      lifeTime: 200
       fallSpeed: 0
       rateOverTime: 50
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
-      hasRotation: 0
-      rotationOverLifetime: 0
+      hasRotation: 1
+      rotationOverLifetime: 20
   - name: Snow
     useParticlesRain: 1
     useParticlesCloud: 0
@@ -159,14 +159,14 @@ MonoBehaviour:
     particleProperitesRain:
       particleSprite: {fileID: 2800000, guid: 71c97477e86b01849b2eb44a59769090, type: 3}
       size: 1
-      lifeTime: 5
+      lifeTime: 12
       fallSpeed: 0
-      rateOverTime: 50
+      rateOverTime: 1000
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
-      hasRotation: 0
-      rotationOverLifetime: 0
+      hasRotation: 1
+      rotationOverLifetime: 45
     cloudHeight: 10
     particleProperitesCloud:
       particleSprite: {fileID: 0}
@@ -186,23 +186,23 @@ MonoBehaviour:
     particleProperitesRain:
       particleSprite: {fileID: 2800000, guid: 71c97477e86b01849b2eb44a59769090, type: 3}
       size: 1
-      lifeTime: 5
-      fallSpeed: 0
-      rateOverTime: 50
+      lifeTime: 3
+      fallSpeed: 1
+      rateOverTime: 5000
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
-      hasRotation: 0
-      rotationOverLifetime: 0
+      hasRotation: 1
+      rotationOverLifetime: 45
     cloudHeight: 10
     particleProperitesCloud:
-      particleSprite: {fileID: 0}
-      size: 1
-      lifeTime: 5
+      particleSprite: {fileID: 2800000, guid: 45ee6d33e45bb1746a6d377f5c378834, type: 3}
+      size: 15
+      lifeTime: 200
       fallSpeed: 0
       rateOverTime: 50
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
-      hasRotation: 0
-      rotationOverLifetime: 0
+      hasRotation: 1
+      rotationOverLifetime: 20

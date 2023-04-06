@@ -27,7 +27,16 @@ public class WeatherEditor : Editor
         }
 
         SetWeatherNames();
-        DrawSettingsEditor(weatherController.weatherSettings, ref weatherController.settingsFoldout, ref weatherSettingsEditor);
+
+        using (var check = new EditorGUI.ChangeCheckScope())
+        {
+            DrawSettingsEditor(weatherController.weatherSettings, ref weatherController.settingsFoldout, ref weatherSettingsEditor);
+            if (check.changed)
+            { // update weather if something in inspector changed
+                weatherController.UpdateWeather();
+            }
+        }
+        
     }
 
 
