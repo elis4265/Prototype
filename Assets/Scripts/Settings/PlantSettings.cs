@@ -12,6 +12,8 @@ public class PlantSettings : ScriptableObject
     public Gradient fruitsColorScheme;
     [ConditionalHide("hasFruits"), Range(0,10)]
     public int harvestCooldown = 1;
+    [ConditionalHide("hasFruits")]
+    public Vector3 fruitFullScale = Vector3.zero;
     public SeasonSettings[] seasonSettings = new SeasonSettings[4];
 
 

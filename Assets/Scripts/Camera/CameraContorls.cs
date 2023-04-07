@@ -23,10 +23,15 @@ public class CameraContorls : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKey(KeyCode.W)) transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.World);
-        if (Input.GetKey(KeyCode.S)) transform.Translate(Vector3.back * Time.deltaTime * speed, Space.World);
-        if (Input.GetKey(KeyCode.A)) transform.Translate(Vector3.left * Time.deltaTime * speed, Space.World);
-        if (Input.GetKey(KeyCode.D)) transform.Translate(Vector3.right * Time.deltaTime * speed, Space.World);
+        if (Input.GetKey(KeyCode.A)) transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.World);
+        if (Input.GetKey(KeyCode.D)) transform.Translate(Vector3.back * Time.deltaTime * speed, Space.World);
+        if (Input.GetKey(KeyCode.S)) transform.Translate(Vector3.left * Time.deltaTime * speed, Space.World);
+        if (Input.GetKey(KeyCode.W)) transform.Translate(Vector3.right * Time.deltaTime * speed, Space.World);
+
+        if (Input.GetKey(KeyCode.UpArrow)) transform.Translate(transform.forward * Time.deltaTime * speed, Space.World);
+        if (Input.GetKey(KeyCode.DownArrow)) transform.Translate(-transform.forward * Time.deltaTime * speed, Space.World);
+        if (Input.GetKey(KeyCode.LeftArrow)) transform.Translate(-transform.right * Time.deltaTime * speed, Space.World);
+        if (Input.GetKey(KeyCode.RightArrow)) transform.Translate(transform.right * Time.deltaTime * speed, Space.World);
 
         if (Input.GetKey(KeyCode.Q))
         {

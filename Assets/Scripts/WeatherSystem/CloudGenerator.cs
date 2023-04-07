@@ -31,4 +31,12 @@ public static class CloudGenerator
         float sample = Mathf.PerlinNoise(xCoord, yCoord);
         return new Color(sample, sample, sample);
     }
+    private static float TileWrapper()
+    { // wrapping coockie map 
+        float newVal = 0;
+
+
+         
+        return newVal;
+    }
 }

@@ -43,6 +43,7 @@ MonoBehaviour:
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
   harvestCooldown: 1
+  fruitFullScale: {x: 23.57563, y: 23.57563, z: 23.57563}
   seasonSettings:
   - fruitingSpeed: 10
     fruitRegrowCooldown: 10

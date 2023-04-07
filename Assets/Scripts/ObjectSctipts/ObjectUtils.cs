@@ -5,6 +5,20 @@ using UnityEngine;
 
 public static class ObjectUtils
 {
+    public static Mesh CombineChildMeshes(Transform obj)
+    {
+        Mesh mesh = new Mesh();
+        CombineInstance[] combine = new CombineInstance[obj.childCount];
+
+        for (int i = 0; i < obj.childCount; i++)
+        {
+            combine[i].mesh = obj.GetChild(i).GetComponent<MeshFilter>().mesh;
+            combine[i].transform = obj.GetChild(i).transform.localToWorldMatrix;
+        }
+
+        mesh.CombineMeshes(combine);
+        return mesh;
+    }
     /// <summary>
     /// Sets color of object or all children of object.
     /// </summary>
@@ -26,6 +40,20 @@ public static class ObjectUtils
                     if (!obj.GetComponent<MeshRenderer>()) throw new System.Exception($"Object you tired to recolor, {objects.name} desn't have MeshRenderer.");
                     obj.GetComponent<MeshRenderer>().materials[i].color = color;
                 }
+            }
+        }
+    }
+    public static void SetObjectsScale(Vector3 newScale, Transform objects)
+    { 
+        if (objects.childCount == 0)
+        {
+            objects.localScale = newScale;
+        }
+        else
+        {
+            foreach (Transform obj in objects)
+            {
+                obj.localScale = newScale;
             }
         }
     }

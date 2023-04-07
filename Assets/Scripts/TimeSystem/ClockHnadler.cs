@@ -38,24 +38,25 @@ public class ClockHnadler : MonoBehaviour
     void Start()
     {
         ///Subscribinf to Tick system and updating time and daylight.
-        TimeTickSystem.OnTick += delegate (object sender, TimeTickSystem.OnTickEventArgs e)
-        {
-            if (pause) return;
-            tick++;
-            if (tick >= timeSpeed)
-            {
-                tick -= timeSpeed;
-                if (ultraSpeed)
-                {
-                    IncrementDate();
-                    return;
-                }
-                if(logTimeInfo) Debug.Log("Tick " + e.tick);
-                IncreaseTime();
-                dayNightCycler.UpdateDayNightTime(time);
-            }
-        };
+        TimeTickSystem.OnTick += OnTickUpdate;
         UpdateDateText();
+    }
+    private void OnTickUpdate(object sender, TimeTickSystem.OnTickEventArgs e)
+    {
+        if (pause) return;
+        tick++;
+        if (tick >= timeSpeed)
+        {
+            tick -= timeSpeed;
+            if (ultraSpeed)
+            {
+                IncrementDate();
+                return;
+            }
+            if (logTimeInfo) Debug.Log("Tick " + e.tick);
+            IncreaseTime();
+            dayNightCycler.UpdateDayNightTime(time);
+        }
     }
     /// <summary>
     /// Increasing time value and updating OnScreen clock.
@@ -127,4 +128,8 @@ public class ClockHnadler : MonoBehaviour
     }
     private int GetSeason(int month) { return (month + 1) / TimeUtils.GetMonthsPerSeason() - 1; }  // 2 months per seasons, needs better calculation to be universal
     public void SetSpeed(int speed) { timeSpeed = Mathf.Max(1, 20 - speed); }
+    private void OnDestroy()
+    {
+        TimeTickSystem.OnTick -= OnTickUpdate;
+    }
 }

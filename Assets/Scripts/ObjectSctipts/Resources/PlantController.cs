@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 // To do, set random value as offset when instantiating plants and apply it to leaves gradient value calculation (t in lerp) so its not so uniformal
+// there is combining leaves colliders for demo testing, might need to be removed at some point
 public class PlantController : MonoBehaviour
 {
     public enum GrowingStage { Growing, Static, Fruiting, Decaying }
@@ -42,21 +43,41 @@ public class PlantController : MonoBehaviour
     void Start()
     {
         Initiate();
+        SetupColliders();
         // for daily updating
-        ClockHnadler.OnDayStart += delegate (object sender, ClockHnadler.OnDayStartEventArgs e)
-        {
-            currentSeason = e.season;
-            currentSeasonSettings = plantSettings.seasonSettings[currentSeason];
-            dayInSeason = TimeUtils.GetDayInSeason(e.date);
-            UpdateLeavesColors();
-        };
+        ClockHnadler.OnDayStart += DayUpdate;
         // Update each tick
-        TimeTickSystem.OnTick += delegate (object sender, TimeTickSystem.OnTickEventArgs e)
+        TimeTickSystem.OnTick += TickUpdate;
+    }
+
+    private void SetupColliders()
+    {
+        if (leaves != null && leaves.GetComponent<MeshCollider>() == null)
         {
-            tick++;
-            UpdatePlant();
-            if (tick <= 100) tick -= 100;
-        };
+            if (leaves.childCount > 0)
+            {
+                //leaves.AddComponent<MeshCollider>().sharedMesh = ObjectUtils.CombineChildMeshes(leaves);
+                foreach (Transform child in leaves)
+                {   
+                    if(child.GetComponent<MeshCollider>() != null) continue;
+                    child.AddComponent<MeshCollider>().sharedMesh = child.GetComponent<MeshFilter>().sharedMesh;
+                }
+            }
+            else leaves.AddComponent<MeshCollider>().sharedMesh = leaves.GetComponent<MeshFilter>().sharedMesh;
+        }
+        //if (fruits != null && fruits.GetComponent<MeshCollider>() == null)
+        //{
+        //    if (fruits.childCount > 0)
+        //    {
+        //        //fruits.AddComponent<MeshCollider>().sharedMesh = ObjectUtils.CombineChildMeshes(fruits);
+        //        foreach(Transform child in fruits)
+        //        {
+        //            if(child.GetComponent<MeshCollider>() != null) continue;
+        //            child.AddComponent<MeshCollider>().sharedMesh = child.GetComponent<MeshFilter>().sharedMesh;
+        //        }
+        //    }
+        //    else fruits.AddComponent<MeshCollider>().sharedMesh = fruits.GetComponent<MeshFilter>().sharedMesh;
+        //}
     }
 
     private void Initiate()
@@ -67,7 +88,19 @@ public class PlantController : MonoBehaviour
         UpdateLeavesColors();
         UpdatePlant();
     }
-
+    private void TickUpdate(object sender, TimeTickSystem.OnTickEventArgs e)
+    {
+        tick++;
+        UpdatePlant();
+        if (tick <= 100) tick -= 100;
+    }
+    private void DayUpdate(object sender, ClockHnadler.OnDayStartEventArgs e)
+    {
+        currentSeason = e.season;
+        currentSeasonSettings = plantSettings.seasonSettings[currentSeason];
+        dayInSeason = TimeUtils.GetDayInSeason(e.date);
+        UpdateLeavesColors();
+    }
     private void UpdatePlant()
     {
         switch (plantStage)
@@ -143,15 +176,29 @@ public class PlantController : MonoBehaviour
     /// <summary>
     /// Updates color of fruit based on assigned gradiend color and growth progress.
     /// </summary>
-    private void UpdateFruitColors()
+    private void UpdateFruitColors(float growthProgress)
     {
         if (fruits == null || !fruits.gameObject.activeSelf) return;
-        float progress = growthProgressFruit / (float)MAX_GROWTH;
-        Color newColor = Utils.CalculateColor(plantSettings.fruitsColorScheme, progress);
+        Color newColor = Utils.CalculateColor(plantSettings.fruitsColorScheme, growthProgress);
 
         ObjectUtils.SetObjectsColor(newColor, fruits); //ToDo add some randomness to progress
     }
-    
+    private void UpdateFruitSize(float growthProgress)
+    {
+        Vector3 maxScale = plantSettings.fruitFullScale;
+        float scaleStepX, scaleStepY, scaleStepZ;
+
+        if (maxScale.x == maxScale.y && maxScale.x == maxScale.z)
+            scaleStepX = scaleStepY = scaleStepZ = Mathf.Lerp(0, plantSettings.fruitFullScale.x, growthProgress);
+        else
+        {
+            scaleStepX = Mathf.Lerp(0, plantSettings.fruitFullScale.x, growthProgress);
+            scaleStepY = Mathf.Lerp(0, plantSettings.fruitFullScale.y, growthProgress);
+            scaleStepZ = Mathf.Lerp(0, plantSettings.fruitFullScale.z, growthProgress);
+        }
+        Vector3 newScale = new Vector3(scaleStepX, scaleStepY, scaleStepZ);
+        ObjectUtils.SetObjectsScale(newScale, fruits);
+    }
     private void UpdatePlantGrowth()
     { //ToDo needs rework in future for better system, maybe with more models for growing stages
         float newScale = Mathf.Lerp(0, defaultScale.x, growthProgressPlant / (float)MAX_GROWTH);
@@ -159,7 +206,10 @@ public class PlantController : MonoBehaviour
     }
     private void UpdateFruitGrowth()
     { //In future it would be nice if size of fruits changed as well
-        UpdateFruitColors();
+        float progress = growthProgressFruit / (float)MAX_GROWTH;
+
+        UpdateFruitColors(progress);
+        UpdateFruitSize(progress);
     }
     /// <summary>
     /// Check if plant is still growing.
@@ -188,7 +238,7 @@ public class PlantController : MonoBehaviour
     public void CollectFruit()
     {
         growthProgressFruit = 0;
-        UpdateFruitColors();
+        UpdateFruitGrowth();
         plantStage = GrowingStage.Fruiting;
         fruits.gameObject.SetActive(false);
         fruitCooldown = currentSeasonSettings.fruitRegrowCooldown;
@@ -196,7 +246,7 @@ public class PlantController : MonoBehaviour
     public void ResetPlantGrowth()
     {
         growthProgressPlant = 0;
-        UpdateFruitColors();
+        UpdateFruitGrowth();
         CollectFruit();
         plantStage = GrowingStage.Growing;
     }
@@ -211,5 +261,10 @@ public class PlantController : MonoBehaviour
         {// if plant doesn't have fruits
 
         }
+    }
+    private void OnDestroy()
+    {
+        ClockHnadler.OnDayStart -= DayUpdate;
+        TimeTickSystem.OnTick -= TickUpdate;
     }
 }

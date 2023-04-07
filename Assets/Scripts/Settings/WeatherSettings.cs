@@ -20,6 +20,7 @@ public class WeatherSettings : ScriptableObject
     {
         [HideInInspector]
         public string name;
+        public bool areCloudsOn = false;
         public bool useParticlesRain;
         public bool useParticlesCloud;
         public bool useParticlesGround;

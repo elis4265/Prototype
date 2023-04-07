@@ -11,9 +11,14 @@ public class WeatherController : MonoBehaviour
 {
     private enum ParticleTypes { rain, cloud, ground }
 
+    public bool showSetupSettings = false;
 
+
+    [ConditionalHide("hideSetupSettings")]
     public GameManager gameManager;
+    [ConditionalHide("hideSetupSettings")]
     public DayNightCycler dayNightCycler;
+    [ConditionalHide("hideSetupSettings")]
     public WeatherSettings weatherSettings;
     [HideInInspector]
     public bool settingsFoldout;
@@ -21,15 +26,20 @@ public class WeatherController : MonoBehaviour
     public TimeUtils.Weather currentWeather = TimeUtils.Weather.Clear;
     public Vector2 wind = Vector2.zero;
     public float windMultiplier = 50; // bigger number slower wind
+    public bool areCloudsOn = false;
+    [ConditionalHide("areCloudsOn")]
     public CloudSettings cloudSettings;
 
+    [ConditionalHide("hideSetupSettings")]
     public GameObject terrain;
+    [ConditionalHide("hideSetupSettings")]
     public ParticleSystem particlesRain;
+    [ConditionalHide("hideSetupSettings")]
     public ParticleSystem particlesCloud;
+    [ConditionalHide("hideSetupSettings")]
     public ParticleSystem particlesGround;
 
     private Texture2D cloudTexture;
-    public bool areCloudsOn = false;
     void Start()
     {
         //SetupParticleObjectSizes();
@@ -62,25 +72,18 @@ public class WeatherController : MonoBehaviour
         switch (currentWeather)
         {// idk if this is needed
             case TimeUtils.Weather.Clear:
-                UpdateClouds();
                 break;
             case TimeUtils.Weather.Cloudy:
-                UpdateClouds(true);
                 break;
             case TimeUtils.Weather.Rain:
-                UpdateClouds(true);
                 break;
             case TimeUtils.Weather.Storm:
-                UpdateClouds(true);
                 break;
             case TimeUtils.Weather.Foggy:
-                UpdateClouds();
                 break;
             case TimeUtils.Weather.Snow:
-                UpdateClouds(true);
                 break;
             case TimeUtils.Weather.SnowStorm:
-                UpdateClouds(true);
                 break;
             default:
                 break;
@@ -145,6 +148,8 @@ public class WeatherController : MonoBehaviour
     }
     private void SetupWeather(WeatherSettings.Weather weather)
     {
+        areCloudsOn = weather.areCloudsOn;
+        UpdateClouds(areCloudsOn);
         if (weather.useParticlesRain)
         {
             particlesRain.Play();

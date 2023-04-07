@@ -639,7 +639,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3311766203008671632}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 146.11, y: 0.426, z: 52.19}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.54, y: 0.54, z: 0.54}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultScale: {x: 0, y: 0, z: 0}
   hasFruits: 1
-  plantSettings: {fileID: 11400000, guid: 4a7d62b351f0d6246a9cc5cd0db50dfd, type: 2}
+  plantSettings: {fileID: 0}
   fruits: {fileID: 2308692438998982227}
   leaves: {fileID: 6515774966911455341}
   tickMultiplier: 1
