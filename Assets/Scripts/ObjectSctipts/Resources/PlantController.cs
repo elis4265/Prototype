@@ -24,15 +24,16 @@ public class PlantController : MonoBehaviour
 
     private int currentSeason = 0;
     private int dayInSeason = 0;
-    private int tick = 0;
     public int tickMultiplier = 1;
 
     [ConditionalHide("hasFruits"), Range(0, 100)]
     public int growthProgressFruit = 0;// out of 100
+    private int growthTickFruit = 0;
     [ConditionalHide("hasFruits")]
     public int fruitCooldown = 0;// time between collecting and growing again
     [Range(0, 100), SerializeField]
     private int growthProgressPlant = 100;// out of 100
+    private int growthTickPlant = 0;
 
     [SerializeField]
     private GrowingStage plantStage = GrowingStage.Growing;
@@ -48,6 +49,8 @@ public class PlantController : MonoBehaviour
         ClockHnadler.OnDayStart += DayUpdate;
         // Update each tick
         TimeTickSystem.OnTick += TickUpdate;
+        // Update each new minute
+        ClockHnadler.OnMinuteStart += MinuteUpdate;
     }
 
     private void SetupColliders()
@@ -86,13 +89,17 @@ public class PlantController : MonoBehaviour
         defaultScale = transform.localScale;
         currentSeasonSettings = plantSettings.seasonSettings[currentSeason];
         UpdateLeavesColors();
+        if (hasFruits) UpdateFruitGrowth();
         UpdatePlant();
     }
     private void TickUpdate(object sender, TimeTickSystem.OnTickEventArgs e)
     {
-        tick++;
+        //UpdatePlant();
+    }
+    private void MinuteUpdate(object sender, ClockHnadler.OnMinuteStartEventArgs e)
+    {
+        UpdateGrowthTicks();
         UpdatePlant();
-        if (tick <= 100) tick -= 100;
     }
     private void DayUpdate(object sender, ClockHnadler.OnDayStartEventArgs e)
     {
@@ -109,7 +116,7 @@ public class PlantController : MonoBehaviour
                 if (IsGrowing())
                 {
                     if (fruits.gameObject.activeSelf) fruits.gameObject.SetActive(false);
-                    if (tick % (currentSeasonSettings.growthSpeed * tickMultiplier) == 0)
+                    if (growthTickPlant % (currentSeasonSettings.growthSpeed * tickMultiplier) == 0)
                     {
                         growthProgressPlant++;
                         UpdatePlantGrowth();
@@ -126,7 +133,7 @@ public class PlantController : MonoBehaviour
                 break;
             case GrowingStage.Fruiting:
                 if (growthProgressFruit >= MAX_GROWTH) plantStage = GrowingStage.Static; // if grown up
-                else if (IsFruiting() && tick % (currentSeasonSettings.fruitingSpeed * tickMultiplier) == 0)
+                else if (IsFruiting() && growthTickFruit % (currentSeasonSettings.fruitingSpeed * tickMultiplier) == 0)
                 {
                     if (fruitCooldown <= 0)
                     {
@@ -145,7 +152,11 @@ public class PlantController : MonoBehaviour
         }
     }
 
-
+    private void UpdateGrowthTicks()
+    {
+        if (IsFruiting()) growthTickFruit++;
+        if (IsGrowing()) growthTickPlant++;
+    }
     private void UpdateLeavesColors()
     { //might need change to state mashine if we need to do different behavior based on seasons and plant stage
         if (leaves == null) return;
@@ -266,5 +277,6 @@ public class PlantController : MonoBehaviour
     {
         ClockHnadler.OnDayStart -= DayUpdate;
         TimeTickSystem.OnTick -= TickUpdate;
+        ClockHnadler.OnMinuteStart -= MinuteUpdate;
     }
 }

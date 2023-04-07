@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static TimeTickSystem;
 
 public class ClockHnadler : MonoBehaviour
 {
@@ -14,8 +15,16 @@ public class ClockHnadler : MonoBehaviour
         public int3 date;
         public int season;
     }
+    public class OnHourStartEventArgs : EventArgs
+    {
+    }
+    public class OnMinuteStartEventArgs : EventArgs
+    {
+    }
 
     public static event EventHandler<OnDayStartEventArgs> OnDayStart;
+    public static event EventHandler<OnHourStartEventArgs> OnHourStart;
+    public static event EventHandler<OnMinuteStartEventArgs> OnMinuteStart;
 
     private int3 date = new int3(0, 1, 0); // create event for new day
     public int2 time = new int2(0, 0);
@@ -44,19 +53,27 @@ public class ClockHnadler : MonoBehaviour
     private void OnTickUpdate(object sender, TimeTickSystem.OnTickEventArgs e)
     {
         if (pause) return;
+        int tickInterval = TimeUtils.TICKS_PER_MINUTE / timeSpeed;
         tick++;
-        if (tick >= timeSpeed)
+        if (tick >= tickInterval)
         {
-            tick -= timeSpeed;
+            tick -= tickInterval;
+            if (OnMinuteStart != null) OnMinuteStart(this, new OnMinuteStartEventArgs {  });
+            IncreaseTime();
+
             if (ultraSpeed)
             {
                 IncrementDate();
                 return;
             }
-            if (logTimeInfo) Debug.Log("Tick " + e.tick);
-            IncreaseTime();
+
             dayNightCycler.UpdateDayNightTime(time);
         }
+        //if (tick >= timeSpeed)
+        //{
+        //    tick -= timeSpeed;
+        //    if (logTimeInfo) Debug.Log("Tick " + e.tick);
+        //}
     }
     /// <summary>
     /// Increasing time value and updating OnScreen clock.
@@ -69,6 +86,8 @@ public class ClockHnadler : MonoBehaviour
         minutes++;
         if (CheckHourLenght())
         {
+            if (OnHourStart != null) OnHourStart(this, new OnHourStartEventArgs { });
+
             hours++;
             minutes -= TimeUtils.GetDayLenght().y;
             if (CheckDayLenght())
@@ -127,7 +146,7 @@ public class ClockHnadler : MonoBehaviour
         else dateTextField.text = $"{date.y} / {date.z} / {date.x}";
     }
     private int GetSeason(int month) { return (month + 1) / TimeUtils.GetMonthsPerSeason() - 1; }  // 2 months per seasons, needs better calculation to be universal
-    public void SetSpeed(int speed) { timeSpeed = Mathf.Max(1, 20 - speed); }
+    public void SetSpeed(int speed) { timeSpeed = Mathf.Max(1, speed); }
     private void OnDestroy()
     {
         TimeTickSystem.OnTick -= OnTickUpdate;

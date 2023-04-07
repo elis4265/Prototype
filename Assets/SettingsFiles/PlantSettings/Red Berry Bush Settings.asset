@@ -45,7 +45,7 @@ MonoBehaviour:
   harvestCooldown: 1
   fruitFullScale: {x: 23.57563, y: 23.57563, z: 23.57563}
   seasonSettings:
-  - fruitingSpeed: 10
+  - fruitingSpeed: 1
     fruitRegrowCooldown: 10
     growthSpeed: 1
     resourceAmount: 0
@@ -79,7 +79,7 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     haveFoliage: 1
-  - fruitingSpeed: 3
+  - fruitingSpeed: 1
     fruitRegrowCooldown: 10
     growthSpeed: 1
     resourceAmount: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     haveFoliage: 1
-  - fruitingSpeed: 10
+  - fruitingSpeed: 1
     fruitRegrowCooldown: 10
     growthSpeed: 1
     resourceAmount: 0

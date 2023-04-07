@@ -11,9 +11,10 @@ public static class TimeUtils
     public static float tickSpeedMultiplier = 1;
 
     // previously in clock handler
-    public static int DAYS_IN_MONTH = 30;
-    public static int MONTHS_IN_YEAR = 8;
-    public static int SEASONS = 4;
+    public const int DAYS_IN_MONTH = 30;
+    public const int MONTHS_IN_YEAR = 8;
+    public const int SEASONS = 4;
+    public const int TICKS_PER_MINUTE = 100;
     // previouslt in DayNightCycler
     public const int MINUTES_IN_HOUR = 60;
     public const int HOURS_IN_DAY = 24;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -10,6 +11,8 @@ public class DemoSpawner : MonoBehaviour
     public GameObject[] prefabs;
     public PlantSettings[] berrieSettings;
     public GameObject terrain;
+    public TMP_InputField inputFieldBorder;
+    public TextMeshProUGUI inputFieldBorderPH;
 
     public float spawnBorder = 1000;
     public float spacing = 10;
@@ -19,7 +22,8 @@ public class DemoSpawner : MonoBehaviour
 
     public void Initialize()
     {
-        demoSpawnedPlants = new GameObject("demoSpawnedPlants");
+        if (demoSpawnedPlants == null) demoSpawnedPlants = new GameObject("demoSpawnedPlants");
+        inputFieldBorderPH.text = spawnBorder.ToString();
 
         Vector3 terrainSize = ObjectUtils.GetObjectSize(terrain);
         startSpwanPosition = new Vector3(terrainSize.x, terrain.transform.position.y, terrainSize.z);
@@ -28,8 +32,13 @@ public class DemoSpawner : MonoBehaviour
     {
         foreach (Transform obj in demoSpawnedPlants.transform)
         {
-            DestroyObject(obj.gameObject);
+            Destroy(obj.gameObject);
         }
+    }
+    public void RespawnPlants()
+    {
+        DeleteSpawnedPlants();
+        SpawnRandomPlants();
     }
     public void SpawnRandomPlants()
     {
@@ -59,5 +68,14 @@ public class DemoSpawner : MonoBehaviour
     private PlantSettings SelectRandomSettings()
     {
         return berrieSettings[Random.Range(0, berrieSettings.Length)];
+    }
+    public void SetSpwanBorder(float border)
+    {
+        spawnBorder = border;
+        Debug.Log("border updated");
+    }
+    public void UpdateInputBorders()
+    {
+        SetSpwanBorder(float.Parse(inputFieldBorder.text));
     }
 }
