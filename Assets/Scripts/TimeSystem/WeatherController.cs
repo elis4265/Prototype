@@ -1,14 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using TMPro;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
+using static UnityEngine.ParticleSystem;
+//need to get mesh from terrain and set it as shape ========================================================================================================
 
 public class WeatherController : MonoBehaviour
 {
-    public UniversalAdditionalLightData urpData;
+    private enum ParticleTypes { rain, cloud, ground }
+
 
     public GameManager gameManager;
     public DayNightCycler dayNightCycler;
@@ -24,6 +26,7 @@ public class WeatherController : MonoBehaviour
     public GameObject terrain;
     public ParticleSystem particlesRain;
     public ParticleSystem particlesCloud;
+    public ParticleSystem particlesGround;
 
     private Texture2D cloudTexture;
     public bool areCloudsOn = false;
@@ -87,33 +90,53 @@ public class WeatherController : MonoBehaviour
 
     public void SetupParticleObjectSizes()
     {
-        SetupRainParticleObj();
-        SetupCloudParticleObj();
+        SetupParticle(ParticleTypes.rain, particlesRain);
+        SetupParticle(ParticleTypes.cloud, particlesCloud);
+        SetupParticle(ParticleTypes.ground, particlesGround);
     }
-    private void SetupRainParticleObj()
+
+    private void SetupParticle(ParticleTypes particleType, ParticleSystem particleSystem)
     {
-        Vector3 newSize = ObjectUtils.GetObjectSize(terrain);
-        newSize.y = newSize.z;
-        newSize.z = 1f;
-        Vector3 newPosition = ObjectUtils.GetObjectCenter(terrain);
-        newPosition.y = 50f;// height of object
-        particlesRain.transform.position = newPosition;
-        particlesRain.transform.localEulerAngles = new Vector3(90f, 0);
-        var sh = particlesRain.shape;
-        sh.enabled = true;
-        sh.scale = newSize;
-        sh.shapeType = ParticleSystemShapeType.Box;
-    }
-    private void SetupCloudParticleObj()
-    {
+        Vector3 newSize = Vector3.one;
+        Vector3 newPosition = Vector3.one;
+        Vector3 terrainSize = ObjectUtils.GetObjectSize(terrain);
         float height = 10;
-        Vector3 newSize = new Vector3(ObjectUtils.GetObjectSize(terrain).x,height,1);
-        Vector3 newPosition = new Vector3(ObjectUtils.GetObjectCenter(terrain).x, terrain.transform.position.y + height, terrain.transform.position.z);
-        particlesCloud.transform.position = newPosition;
-        var sh = particlesCloud.shape;
-        sh.enabled = true;
-        sh.scale = newSize;
-        sh.shapeType = ParticleSystemShapeType.Box;
+
+
+        switch (particleType)
+        {
+            case ParticleTypes.rain:
+                height = 50f;
+                newSize = new Vector3(terrainSize.x, terrainSize.z, 1);
+                newPosition = ObjectUtils.GetObjectCenter(terrain);
+                newPosition.y = height;
+                particlesRain.transform.position = newPosition;
+                particlesRain.transform.localEulerAngles = new Vector3(90f, 0); // aiming torwards ground
+                break;
+            case ParticleTypes.cloud:
+                height = 10;
+                newSize = new Vector3(ObjectUtils.GetObjectSize(terrain).x, height, 1);
+                newPosition = new Vector3(ObjectUtils.GetObjectCenter(terrain).x, terrain.transform.position.y + height, terrain.transform.position.z);
+                break;
+            case ParticleTypes.ground:
+                height = terrain.transform.position.y;
+                newSize = new Vector3(terrainSize.x, terrainSize.z, 1);
+                newPosition = ObjectUtils.GetObjectCenter(terrain);
+                newPosition.y = height;
+                particlesGround.transform.position = newPosition;
+                particlesGround.transform.localEulerAngles = new Vector3(-90f, 0); // aiming torwards Sky
+                //need to get mesh from terrain and set it as shape ========================================================================================================
+                //var sh = particlesGround.shape;
+                //sh.enabled = enabled;
+                //sh.shapeType = ParticleSystemShapeType.Mesh;
+                //sh.mesh = 
+                break;
+            default:
+                break;
+        }
+
+        particleSystem.transform.position = newPosition;
+        Utils.SetParticleSystemSize(particleSystem, newSize);
     }
     public void SetWeather(TimeUtils.Weather newWeather)
     {
@@ -126,6 +149,18 @@ public class WeatherController : MonoBehaviour
         {
             particlesRain.Play();
             Utils.SetupParticleSystem(particlesRain, weather.particleProperitesRain, weatherSettings.particleMaterialRain);
+
+            if (weather.applyWindToRain)
+            {
+                weather.particleProperitesRain.hasVelocity = weather.applyWindToRain;
+                var velocityOverLifetime = particlesRain.velocityOverLifetime;
+                velocityOverLifetime.enabled = weather.applyWindToRain;
+                if (weather.applyWindToRain)
+                {
+                    velocityOverLifetime.x = wind.x;
+                    velocityOverLifetime.y = wind.y;
+                }
+            }
         }
         else Utils.StopParticles(particlesRain);
         if (weather.useParticlesCloud)
@@ -134,6 +169,12 @@ public class WeatherController : MonoBehaviour
             Utils.SetupParticleSystem(particlesCloud, weather.particleProperitesCloud, weatherSettings.particleMaterialClouds);
         }
         else Utils.StopParticles(particlesCloud);
+        if (weather.useParticlesGround)
+        {
+            particlesGround.Play();
+            Utils.SetupParticleSystem(particlesGround, weather.particleProperitesGround, weatherSettings.particleMaterialGround);
+        }
+        else Utils.StopParticles(particlesGround);
     }
     private void UpdateClouds(bool cloudsOn = false)
     {

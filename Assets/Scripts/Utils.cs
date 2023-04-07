@@ -46,7 +46,6 @@ public static class Utils
         velocityOverLifetime.enabled = properties.hasVelocity;
         if (properties.hasVelocity)
         {
-
             velocityOverLifetime.orbitalX = properties.orbitalVelocity.x;
             velocityOverLifetime.orbitalY = properties.orbitalVelocity.y;
             velocityOverLifetime.orbitalZ = properties.orbitalVelocity.z;
@@ -62,6 +61,14 @@ public static class Utils
         {
             rotationOverTime.z = properties.rotationOverLifetime / 60f; //this might need fixing
         }
+    }
+
+    public static void SetParticleSystemSize(ParticleSystem particleSystem, Vector3 size, ParticleSystemShapeType psShape = ParticleSystemShapeType.Box, bool enabled = true)
+    {
+        var sh = particleSystem.shape;
+        sh.enabled = enabled;
+        sh.scale = size;
+        sh.shapeType = psShape;
     }
 
     public static void SetupWeatherDropDown(GameObject dropDown)

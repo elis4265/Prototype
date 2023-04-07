@@ -11,6 +11,7 @@ public class WeatherSettings : ScriptableObject
     [Tooltip("Material that is assigned to weather particle system.")]
     public Material particleMaterialRain;
     public Material particleMaterialClouds;
+    public Material particleMaterialGround;
 
     public Weather[] weathers;
 
@@ -21,9 +22,12 @@ public class WeatherSettings : ScriptableObject
         public string name;
         public bool useParticlesRain;
         public bool useParticlesCloud;
+        public bool useParticlesGround;
 
         [ConditionalHide("useParticlesRain"), Header("Rain settings")]
         public float rainHeight = 50f;
+        [ConditionalHide("useParticlesRain")]
+        public bool applyWindToRain = true;
         [ConditionalHide("useParticlesRain")]
         public ParticleProperites particleProperitesRain;
 
@@ -31,5 +35,10 @@ public class WeatherSettings : ScriptableObject
         public float cloudHeight = 10f;
         [ConditionalHide("useParticlesCloud")]
         public ParticleProperites particleProperitesCloud;
+
+        [ConditionalHide("useParticlesGround"), Header("Ground fog settings")]
+        public float groundFog = 0f;
+        [ConditionalHide("useParticlesGround")]
+        public ParticleProperites particleProperitesGround;
     }
 }
