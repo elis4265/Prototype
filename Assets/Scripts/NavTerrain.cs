@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class NavTerrain : MonoBehaviour
 {
@@ -23,13 +23,19 @@ public class NavTerrain : MonoBehaviour
 	   private float z;
 	}; 
 	
+	void Start()
+	{
+		destination = this.transform.position;
+	}
+	
 	void Update()
 	{
 		// if destination != this.Transform.position	
 			// MoveTo(path)
-		if ((this.transform.position - destination).sqrMagnitude > 0.3f)
+		if (Vector3.Distance(this.transform.position, destination) > 0.01f)
 		{
 			MoveTo(destination);
+			RotateTo(destination, 10f);
 		}
 	}
 	
@@ -43,44 +49,17 @@ public class NavTerrain : MonoBehaviour
 		this.transform.position = step;
 	}
 	
-	public void SetDestination(Vector3 destinationInput) 
+	private void RotateTo(Vector3 goal, float rotationSpeed)
 	{
-		//destination = destinationInput; ---opravit
-		//aStar()
-		
-		destination = destinationInput;
-		//destination.y = baseOffset;
-		
-		/*
-		1) make something move just on X and Z via nodes
-		2) make it move on X Z and Y
-		3) make it find path
-		4) implement obstacles (steepness, Unity Obstacles)
-		*/
-		
-		
+		// if looking at the same direction - return
+		//if (this.transform.rotation == goal) return;
+		goal.y = this.transform.position.y;
+		Quaternion targetRotation = Quaternion.LookRotation(goal - this.transform.position);
+		this.transform.rotation = Quaternion.Lerp(this.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 	}
 	
-	
-	/*private void aStar(Vector3  destinationInput)	//change type to float[,,]
+	public void SetDestination(Vector3 destinationInput) 
 	{
-		//returns an array of coordNodes = path, via which the object will "walk" through 
-		//returns float[,,] path
-		
-		
-		Inspo:
-			float[,] grid = MakeGrid(terrain.width * 4, terrain.height * 4);
-			int y;
-			heihgts[x, z];
-			for(int x = 0; x < terrain.width * 4; x++)
-			{
-				for(int z = 0; z < terrain.height * 4; z++)
-				{
-					y = terrain.TerrainData.GetHeight(x, z);
-					heihgts[x, z] = y;
-				}
-			}
-			
-		
-	}*/
+		destination = destinationInput;
+	}
 }

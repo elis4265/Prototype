@@ -7,6 +7,7 @@ TagManager:
   - EdibleByHerbivores
   - OnRespawnTimer
   - The Terrain
+  - Obstacle
   layers:
   - Default
   - TransparentFX
