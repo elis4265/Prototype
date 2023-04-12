@@ -111,7 +111,7 @@ MonoBehaviour:
     rainHeight: 50
     applyWindToRain: 1
     particleProperitesRain:
-      particleSprite: {fileID: 2800000, guid: dd6cbd84f41732e4089dd54865cb0398, type: 3}
+      particleSprite: {fileID: 2800000, guid: ad78c8c045ece384ebd9ad5f23a574ee, type: 3}
       size: 1
       lifeTime: 2
       fallSpeed: 5
@@ -237,7 +237,7 @@ MonoBehaviour:
     rainHeight: 50
     applyWindToRain: 1
     particleProperitesRain:
-      particleSprite: {fileID: 2800000, guid: 71c97477e86b01849b2eb44a59769090, type: 3}
+      particleSprite: {fileID: 2800000, guid: c97b3941134769240b46d5a72d451e41, type: 3}
       size: 1
       lifeTime: 12
       fallSpeed: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
       hasRotation: 1
-      rotationOverLifetime: 45
+      rotationOverLifetime: 75
     cloudHeight: 10
     particleProperitesCloud:
       particleSprite: {fileID: 0}
@@ -279,7 +279,7 @@ MonoBehaviour:
     rainHeight: 50
     applyWindToRain: 1
     particleProperitesRain:
-      particleSprite: {fileID: 2800000, guid: 71c97477e86b01849b2eb44a59769090, type: 3}
+      particleSprite: {fileID: 2800000, guid: c97b3941134769240b46d5a72d451e41, type: 3}
       size: 1
       lifeTime: 3
       fallSpeed: 1
