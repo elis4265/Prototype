@@ -30,9 +30,12 @@ public static class Utils
         ps.Stop();
         ps.Clear();
     }
-    public static void SetupParticleSystem(ParticleSystem particle, ParticleProperites properties, Material particleMaterial = null)
+    public static void SetupParticleSystem(ParticleSystem particle, ParticleProperites properties, Material[] particleMaterials)
     {
-        particle.GetComponent<ParticleSystemRenderer>().sharedMaterial.SetTexture("_MainTex", properties.particleSprite);
+        //particle.GetComponent<ParticleSystemRenderer>().sharedMaterial.SetTexture("_MainTex", properties.particleSprite);
+        var psRenderer = particle.GetComponent<ParticleSystemRenderer>();
+        psRenderer.renderMode = properties.renderMode;
+        psRenderer.sharedMaterial = particleMaterials[properties.particleMaterialIndex];
 
         var main = particle.main;
         main.startSize = properties.size;
@@ -87,11 +90,13 @@ public static class Utils
 [System.Serializable]
 public class ParticleProperites
 {
-    public Texture2D particleSprite;
+    public int particleMaterialIndex;
     public float size = 1f;
     public float lifeTime = 5f;
     public float fallSpeed = 0f; // gravity modifier in particle system
     public float rateOverTime = 50f; // number of particles over time
+
+    public ParticleSystemRenderMode renderMode = ParticleSystemRenderMode.VerticalBillboard;
 
     public bool hasVelocity = false;
     [ConditionalHide("hasVelocity")]
@@ -102,6 +107,7 @@ public class ParticleProperites
     public bool hasRotation = false;
     [ConditionalHide("hasRotation")]
     public float rotationOverLifetime = 0f; //approximate value of degrees per second or something
+
     // public bool noise = false; // could be usefull for snowing or something 
     // public bool collision = false; // could be usefull for hailing or natural disasters
     // public bool lights = false; // could be usefull for ligtning or radioactive fallout or shit

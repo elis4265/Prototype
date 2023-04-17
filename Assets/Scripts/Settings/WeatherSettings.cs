@@ -9,9 +9,11 @@ using UnityEngine;
 public class WeatherSettings : ScriptableObject
 {
     [Tooltip("Material that is assigned to weather particle system.")]
-    public Material particleMaterialRain;
-    public Material particleMaterialClouds;
-    public Material particleMaterialGround;
+    public Material[] particleMaterials;
+    //public Material particleMaterialRain;
+    //public Material particleMaterialSnow;
+    //public Material particleMaterialClouds;
+    //public Material particleMaterialGround;
 
     public Weather[] weathers;
 

@@ -128,7 +128,7 @@ public class WeatherController : MonoBehaviour
                 newPosition.y = height;
                 particlesGround.transform.position = newPosition;
                 particlesGround.transform.localEulerAngles = new Vector3(-90f, 0); // aiming torwards Sky
-                //need to get mesh from terrain and set it as shape ========================================================================================================
+                //need to get mesh from terrain and set it as shape ======================================================================================================== ToDo when map generation is done
                 //var sh = particlesGround.shape;
                 //sh.enabled = enabled;
                 //sh.shapeType = ParticleSystemShapeType.Mesh;
@@ -153,7 +153,7 @@ public class WeatherController : MonoBehaviour
         if (weather.useParticlesRain)
         {
             particlesRain.Play();
-            Utils.SetupParticleSystem(particlesRain, weather.particleProperitesRain, weatherSettings.particleMaterialRain);
+            Utils.SetupParticleSystem(particlesRain, weather.particleProperitesRain, weatherSettings.particleMaterials);
 
             if (weather.applyWindToRain)
             {
@@ -171,13 +171,13 @@ public class WeatherController : MonoBehaviour
         if (weather.useParticlesCloud)
         {
             particlesCloud.Play();
-            Utils.SetupParticleSystem(particlesCloud, weather.particleProperitesCloud, weatherSettings.particleMaterialClouds);
+            Utils.SetupParticleSystem(particlesCloud, weather.particleProperitesCloud, weatherSettings.particleMaterials);
         }
         else Utils.StopParticles(particlesCloud);
         if (weather.useParticlesGround)
         {
             particlesGround.Play();
-            Utils.SetupParticleSystem(particlesGround, weather.particleProperitesGround, weatherSettings.particleMaterialGround);
+            Utils.SetupParticleSystem(particlesGround, weather.particleProperitesGround, weatherSettings.particleMaterials);
         }
         else Utils.StopParticles(particlesGround);
     }
