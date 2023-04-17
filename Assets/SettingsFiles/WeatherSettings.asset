@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b97d85d45bda8042ad95ba1aeb92ea3, type: 3}
   m_Name: WeatherSettings
   m_EditorClassIdentifier: 
-  particleMaterialRain: {fileID: 2100000, guid: bda64b4c21cfabf428482f61d1636c9d,
-    type: 2}
-  particleMaterialClouds: {fileID: 2100000, guid: ac85b43e7d84cd04db1916ee2ad86e9b,
-    type: 2}
-  particleMaterialGround: {fileID: 2100000, guid: 90bd96f1bc8dfc14eb6747a63512938c,
-    type: 2}
+  particleMaterials:
+  - {fileID: 2100000, guid: bda64b4c21cfabf428482f61d1636c9d, type: 2}
+  - {fileID: 2100000, guid: 51d942dc85ff8b44491a93d1e949a9d5, type: 2}
+  - {fileID: 2100000, guid: ac85b43e7d84cd04db1916ee2ad86e9b, type: 2}
+  - {fileID: 2100000, guid: 90bd96f1bc8dfc14eb6747a63512938c, type: 2}
   weathers:
   - name: Clear
     areCloudsOn: 0
@@ -27,11 +26,12 @@ MonoBehaviour:
     rainHeight: 50
     applyWindToRain: 1
     particleProperitesRain:
-      particleSprite: {fileID: 0}
+      particleMaterialIndex: 0
       size: 1
       lifeTime: 5
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 3
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -39,11 +39,12 @@ MonoBehaviour:
       rotationOverLifetime: 0
     cloudHeight: 10
     particleProperitesCloud:
-      particleSprite: {fileID: 0}
+      particleMaterialIndex: 0
       size: 1
       lifeTime: 5
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 3
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -51,11 +52,12 @@ MonoBehaviour:
       rotationOverLifetime: 0
     groundFog: 10
     particleProperitesGround:
-      particleSprite: {fileID: 0}
+      particleMaterialIndex: 0
       size: 1
       lifeTime: 5
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 3
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -69,11 +71,12 @@ MonoBehaviour:
     rainHeight: 50
     applyWindToRain: 1
     particleProperitesRain:
-      particleSprite: {fileID: 0}
+      particleMaterialIndex: 0
       size: 1
       lifeTime: 5
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 3
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -81,11 +84,12 @@ MonoBehaviour:
       rotationOverLifetime: 0
     cloudHeight: 10
     particleProperitesCloud:
-      particleSprite: {fileID: 2800000, guid: 45ee6d33e45bb1746a6d377f5c378834, type: 3}
+      particleMaterialIndex: 0
       size: 1
       lifeTime: 5
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 3
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -93,11 +97,12 @@ MonoBehaviour:
       rotationOverLifetime: 0
     groundFog: 10
     particleProperitesGround:
-      particleSprite: {fileID: 0}
+      particleMaterialIndex: 0
       size: 1
       lifeTime: 5
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 3
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -111,11 +116,12 @@ MonoBehaviour:
     rainHeight: 50
     applyWindToRain: 1
     particleProperitesRain:
-      particleSprite: {fileID: 2800000, guid: ad78c8c045ece384ebd9ad5f23a574ee, type: 3}
+      particleMaterialIndex: 0
       size: 1
       lifeTime: 2
       fallSpeed: 5
       rateOverTime: 4000
+      renderMode: 3
       hasVelocity: 1
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -123,11 +129,12 @@ MonoBehaviour:
       rotationOverLifetime: 0
     cloudHeight: 10
     particleProperitesCloud:
-      particleSprite: {fileID: 0}
+      particleMaterialIndex: 0
       size: 1
       lifeTime: 5
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 3
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -135,11 +142,12 @@ MonoBehaviour:
       rotationOverLifetime: 0
     groundFog: 10
     particleProperitesGround:
-      particleSprite: {fileID: 0}
+      particleMaterialIndex: 0
       size: 1
       lifeTime: 5
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 3
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -153,11 +161,12 @@ MonoBehaviour:
     rainHeight: 50
     applyWindToRain: 1
     particleProperitesRain:
-      particleSprite: {fileID: 2800000, guid: dd6cbd84f41732e4089dd54865cb0398, type: 3}
+      particleMaterialIndex: 0
       size: 2
       lifeTime: 0.5
       fallSpeed: 50
       rateOverTime: 5000
+      renderMode: 3
       hasVelocity: 1
       orbitalVelocity: {x: 11, y: 12, z: 13}
       linearVelocity: {x: 21, y: 22, z: 23}
@@ -165,11 +174,12 @@ MonoBehaviour:
       rotationOverLifetime: 13
     cloudHeight: 10
     particleProperitesCloud:
-      particleSprite: {fileID: 2800000, guid: 45ee6d33e45bb1746a6d377f5c378834, type: 3}
+      particleMaterialIndex: 0
       size: 1
       lifeTime: 5
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 3
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -177,11 +187,12 @@ MonoBehaviour:
       rotationOverLifetime: 0
     groundFog: 10
     particleProperitesGround:
-      particleSprite: {fileID: 0}
+      particleMaterialIndex: 0
       size: 1
       lifeTime: 5
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 3
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -195,11 +206,12 @@ MonoBehaviour:
     rainHeight: 50
     applyWindToRain: 1
     particleProperitesRain:
-      particleSprite: {fileID: 0}
+      particleMaterialIndex: 0
       size: 1
       lifeTime: 5
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 3
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -207,11 +219,12 @@ MonoBehaviour:
       rotationOverLifetime: 0
     cloudHeight: 10
     particleProperitesCloud:
-      particleSprite: {fileID: 2800000, guid: 45ee6d33e45bb1746a6d377f5c378834, type: 3}
+      particleMaterialIndex: 2
       size: 15
       lifeTime: 200
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 0
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -219,11 +232,12 @@ MonoBehaviour:
       rotationOverLifetime: 20
     groundFog: 10
     particleProperitesGround:
-      particleSprite: {fileID: 0}
+      particleMaterialIndex: 0
       size: 1
       lifeTime: 5
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 3
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -237,11 +251,12 @@ MonoBehaviour:
     rainHeight: 50
     applyWindToRain: 1
     particleProperitesRain:
-      particleSprite: {fileID: 2800000, guid: c97b3941134769240b46d5a72d451e41, type: 3}
+      particleMaterialIndex: 1
       size: 1
       lifeTime: 12
       fallSpeed: 0
       rateOverTime: 1000
+      renderMode: 0
       hasVelocity: 1
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -249,11 +264,12 @@ MonoBehaviour:
       rotationOverLifetime: 75
     cloudHeight: 10
     particleProperitesCloud:
-      particleSprite: {fileID: 0}
+      particleMaterialIndex: 0
       size: 1
       lifeTime: 5
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 3
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -261,11 +277,12 @@ MonoBehaviour:
       rotationOverLifetime: 0
     groundFog: 10
     particleProperitesGround:
-      particleSprite: {fileID: 0}
+      particleMaterialIndex: 0
       size: 1
       lifeTime: 5
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 3
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -279,11 +296,12 @@ MonoBehaviour:
     rainHeight: 50
     applyWindToRain: 1
     particleProperitesRain:
-      particleSprite: {fileID: 2800000, guid: c97b3941134769240b46d5a72d451e41, type: 3}
+      particleMaterialIndex: 1
       size: 1
       lifeTime: 3
       fallSpeed: 1
       rateOverTime: 5000
+      renderMode: 0
       hasVelocity: 1
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -291,11 +309,12 @@ MonoBehaviour:
       rotationOverLifetime: 45
     cloudHeight: 10
     particleProperitesCloud:
-      particleSprite: {fileID: 2800000, guid: 45ee6d33e45bb1746a6d377f5c378834, type: 3}
+      particleMaterialIndex: 2
       size: 15
       lifeTime: 200
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 0
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
@@ -303,11 +322,12 @@ MonoBehaviour:
       rotationOverLifetime: 20
     groundFog: 10
     particleProperitesGround:
-      particleSprite: {fileID: 0}
+      particleMaterialIndex: 0
       size: 1
       lifeTime: 5
       fallSpeed: 0
       rateOverTime: 50
+      renderMode: 3
       hasVelocity: 0
       orbitalVelocity: {x: 0, y: 0, z: 0}
       linearVelocity: {x: 0, y: 0, z: 0}
