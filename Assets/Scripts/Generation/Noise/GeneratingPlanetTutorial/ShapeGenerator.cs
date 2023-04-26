@@ -26,7 +26,7 @@ public class ShapeGenerator
 
         elevationMinMax = new MinMax();
     }
-    public Vector3 CalculatePointOnMapHeight(Vector3 pointOnUnitMap) { return new Vector3(pointOnUnitMap.x, CalculatePointOnMap(pointOnUnitMap).y, pointOnUnitMap.z); }
+    public Vector3 CalculatePointOnMapHeight(Vector3 pointOnUnitMap) { return CalculatePointOnMap(pointOnUnitMap); }
     public Vector3 CalculatePointOnMap(Vector3 pointOnUnitMap) //optimized for radial planet generating
     {
         float firstLayarValue = 0;
@@ -64,11 +64,11 @@ public class ShapeGenerator
                 }
             }
         }
-        if (elevation > 0) elevation = settings.planetRadius * (1 + elevation);
-        else elevation = settings.planetRadius * (1 + elevation);
+        elevation = settings.planetRadius * (1 + elevation);
 
         elevationMinMax.AddValue(elevation);
-        return pointOnUnitMap * elevation;
+
+        return new Vector3(pointOnUnitMap.x * settings.planetRadius, pointOnUnitMap.y * elevation, pointOnUnitMap.z * settings.planetRadius);
     }
 
     public float GetPlanetScale() { return settings.planetRadius; }

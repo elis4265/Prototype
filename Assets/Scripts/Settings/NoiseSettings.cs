@@ -31,5 +31,4 @@ public class NoiseSettings
     {
         public float weightMultiplier = .8f;
     }
-
 }

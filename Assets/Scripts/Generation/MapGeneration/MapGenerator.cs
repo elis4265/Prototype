@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
@@ -9,7 +10,8 @@ public class MapGenerator : MonoBehaviour
     public bool autoUpdate = true;
     public bool generateWaterSurface = true;
 
-    public int chunks = 1;
+    public int chunksResolution = 1;
+    int chunks = 1;
 
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
@@ -28,45 +30,56 @@ public class MapGenerator : MonoBehaviour
     public bool shapeSettingsFoldout;
     [HideInInspector]
     public bool colorSettingsFoldout;
-    
+    private bool debugInfo = false;
 
     public void Initialize()
     {
+        chunks = chunksResolution * chunksResolution;
         shapeGenerator.UpdateSettings(shapeSettings);
         //colorGenerator.UpdateSettings(colorSettings);
 
-        if (meshFilters == null || meshFilters.Length != chunks) meshFilters = new MeshFilter[chunks];
-        if (waterMeshFilters == null || waterMeshFilters.Length != chunks) waterMeshFilters = new MeshFilter[chunks];
+        if (meshFilters == null || meshFilters.Length != chunks)
+        {
+            if (meshFilters != null) DeleteOldMeshes();
+            meshFilters = new MeshFilter[chunks];
+            waterMeshFilters = new MeshFilter[chunks];
+        }
         terrainFaces = new TerrainFace[chunks];
 
-        for (int i = 0; i < chunks; i++)
+        int index = 0;
+        for (int x = 0; x < chunksResolution; x++)
         {
-            if (meshFilters[i] == null) // to do add or meshwaterfilters and cleaning of chidren
+            for (int y = 0; y < chunksResolution; y++)
             {
-                GameObject meshObj = new GameObject("mesh");
-                meshObj.transform.parent = transform;
+                if (debugInfo)Debug.Log($"x: {x}, y {y}, index: {index}");
+                if (meshFilters[index] == null) // to do add or meshwaterfilters and cleaning of chidren
+                {
+                    GameObject meshObj = new GameObject("mesh " + index);
+                    meshObj.transform.parent = transform;
 
-                meshObj.AddComponent<MeshRenderer>();
-                meshFilters[i] = meshObj.AddComponent<MeshFilter>();
-                meshFilters[i].sharedMesh = new Mesh();
-                meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = demoMaterial; //assigning demo material for now
-            }
-            if (waterMeshFilters[i] == null) // to do add or meshwaterfilters and cleaning of chidren
-            {
-                GameObject meshWaterObj = new GameObject("meshWater");
-                meshWaterObj.transform.parent = transform;
+                    meshObj.AddComponent<MeshRenderer>();
+                    meshFilters[index] = meshObj.AddComponent<MeshFilter>();
+                    meshFilters[index].sharedMesh = new Mesh();
+                    meshFilters[index].GetComponent<MeshRenderer>().sharedMaterial = demoMaterial; //assigning demo material for now
+                }
+                if (waterMeshFilters[index] == null) // to do add or meshwaterfilters and cleaning of chidren
+                {
+                    GameObject meshWaterObj = new GameObject("meshWater " + index);
+                    meshWaterObj.transform.parent = transform;
 
-                meshWaterObj.AddComponent<MeshRenderer>();
-                waterMeshFilters[i] = meshWaterObj.AddComponent<MeshFilter>();
-                waterMeshFilters[i].sharedMesh = new Mesh();
-                waterMeshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = demoMaterial; //assigning demo material for now
+                    meshWaterObj.AddComponent<MeshRenderer>();
+                    waterMeshFilters[index] = meshWaterObj.AddComponent<MeshFilter>();
+                    waterMeshFilters[index].sharedMesh = new Mesh();
+                    waterMeshFilters[index].GetComponent<MeshRenderer>().sharedMaterial = demoMaterial; //assigning demo material for now
+                }
+                //meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
+                //waterMeshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.waterMaterial;
+                terrainFaces[index] = new TerrainFace(shapeGenerator, meshFilters[index].sharedMesh, waterMeshFilters[index].sharedMesh, resolution, Vector3.up, new Vector2(x,y));//directions[i]);
+                bool renderFace = true; // calculate if face should be rendered
+                meshFilters[index].gameObject.SetActive(renderFace);
+                waterMeshFilters[index].gameObject.SetActive(renderFace && generateWaterSurface);
+                index++;
             }
-            //meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
-            //waterMeshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.waterMaterial;
-            terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, waterMeshFilters[i].sharedMesh, resolution, Vector3.up);//directions[i]);
-            bool renderFace = true; // calculate if face should be rendered
-            meshFilters[i].gameObject.SetActive(renderFace);
-            waterMeshFilters[i].gameObject.SetActive(renderFace && generateWaterSurface);
         }
     }
     public void GenerateMap()
@@ -94,6 +107,7 @@ public class MapGenerator : MonoBehaviour
 
     public void GenerateMesh()
     {
+        if(debugInfo)Debug.Log($"chunks: {chunks}, resolution {chunksResolution}, meshes: {meshFilters.Length}");
         for (int i = 0; i < chunks; i++)
         {
             if (meshFilters[i].gameObject.activeSelf)
@@ -115,4 +129,15 @@ public class MapGenerator : MonoBehaviour
     //        }
     //    }
     //}
+    public void DeleteOldMeshes()
+    {
+        foreach (var mesh in meshFilters)
+        {
+            DestroyImmediate(mesh.gameObject);
+        }
+        foreach (var mesh in waterMeshFilters)
+        {
+            DestroyImmediate(mesh.gameObject);
+        }
+    }
 }
